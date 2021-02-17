@@ -1,0 +1,39 @@
+{
+	"Main" : {
+		"menu_text" : {
+			"type" : "Text",
+			"config" : {
+				"label" : "Menu text"
+			}
+		},
+		"uid" : {
+			"type" : "UID",
+			"config" : {
+				"label" : "UID"
+			}
+		},
+		"title" : {
+			"type" : "StructuredText",
+			"config" : {
+				"single" : "heading1",
+				"label" : "Title"
+			}
+		},
+		"subtitle" : {
+			"type" : "StructuredText",
+			"config" : {
+				"single" : "paragraph, preformatted, strong, em, hyperlink, rtl",
+				"allowTargetBlank" : true,
+				"label" : "Subtitle"
+			}
+		},
+		"content" : {
+			"type" : "StructuredText",
+			"config" : {
+				"multi" : "paragraph, preformatted, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl",
+				"allowTargetBlank" : true,
+				"label" : "Content"
+			}
+		}
+	}
+}

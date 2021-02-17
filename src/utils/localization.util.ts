@@ -44,10 +44,12 @@ export const getLocale = (localeCode = ""): Locale => {
 	switch (localeCode) {
 		case "de":
 		case "de_CH":
+		case "de-ch":
 			return Locale.de_CH;
 
 		case "ja":
 		case "ja_JP":
+		case "ja-jp":
 			return Locale.ja_JP;
 
 		default:
@@ -55,10 +57,7 @@ export const getLocale = (localeCode = ""): Locale => {
 	}
 };
 
-export const getSlug = (
-	context?: SlugContext,
-	locale = Locale.en_US
-): string => {
+export const getSlug = (context?: SlugContext, locale?: Locale): string => {
 	const lang = getLanguageCode(locale || context?.locale);
 	const prefix = LanguageCode.en === lang ? "/" : `/${lang}/`;
 

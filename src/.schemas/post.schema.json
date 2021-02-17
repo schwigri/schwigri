@@ -1,0 +1,105 @@
+{
+	"Main" : {
+		"uid" : {
+			"type" : "UID",
+			"config" : {
+				"label" : "UID"
+			}
+		},
+		"title" : {
+			"type" : "StructuredText",
+			"config" : {
+				"single" : "heading1",
+				"label" : "Title"
+			}
+		},
+		"subtitle" : {
+			"type" : "StructuredText",
+			"config" : {
+				"single" : "paragraph, preformatted, strong, em, hyperlink, o-list-item",
+				"allowTargetBlank" : true,
+				"label" : "Subtitle"
+			}
+		},
+		"featured_image" : {
+			"type" : "Image",
+			"config" : {
+				"constraint" : {
+					"width" : null,
+					"height" : null
+				},
+				"thumbnails" : [ {
+					"name" : "mobile_card",
+					"width" : 720,
+					"height" : 445
+				}, {
+					"name" : "desktop_header",
+					"width" : 2560,
+					"height" : 1061
+				} ],
+				"label" : "Featured image"
+			}
+		},
+		"excerpt" : {
+			"type" : "Text",
+			"config" : {
+				"label" : "Excerpt"
+			}
+		},
+		"body" : {
+			"type" : "Slices",
+			"fieldset" : "Slice zone",
+			"config" : {
+				"labels" : {
+					"rich_text" : [ ],
+					"code_block" : [ ]
+				},
+				"choices" : {
+					"rich_text" : {
+						"type" : "Slice",
+						"fieldset" : "Rich text",
+						"description" : "Add rich text content",
+						"icon" : "text_fields",
+						"display" : "list",
+						"non-repeat" : {
+							"content" : {
+								"type" : "StructuredText",
+								"config" : {
+									"multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+									"allowTargetBlank" : true,
+									"label" : "Content"
+								}
+							}
+						},
+						"repeat" : { }
+					},
+					"code_block" : {
+						"type" : "Slice",
+						"fieldset" : "Code block",
+						"description" : "Add a code block",
+						"icon" : "code",
+						"display" : "list",
+						"non-repeat" : {
+							"language" : {
+								"type" : "Select",
+								"config" : {
+									"options" : [ "HTML", "CSS", "JavaScript", "TypeScript" ],
+									"label" : "Language"
+								}
+							},
+							"content" : {
+								"type" : "StructuredText",
+								"config" : {
+									"multi" : "preformatted",
+									"allowTargetBlank" : true,
+									"label" : "Content"
+								}
+							}
+						},
+						"repeat" : { }
+					}
+				}
+			}
+		}
+	}
+}
