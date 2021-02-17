@@ -1,0 +1,19 @@
+{
+	"Main" : {
+		"title" : {
+			"type" : "StructuredText",
+			"config" : {
+				"single" : "heading2",
+				"label" : "Title"
+			}
+		},
+		"description" : {
+			"type" : "StructuredText",
+			"config" : {
+				"multi" : "preformatted",
+				"allowTargetBlank" : true,
+				"label" : "Description"
+			}
+		}
+	}
+}
