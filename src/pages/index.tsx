@@ -1,8 +1,8 @@
 import React from "react";
 
 class IndexPage extends React.Component {
-	render() {
-		return <p>Index page</p>;
+	render(): React.ReactNode {
+		return <p>Index page.</p>;
 	}
 }
 
