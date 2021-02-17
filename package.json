@@ -1,6 +1,6 @@
 {
 	"name": "schwigri",
-	"description": "",
+	"description": "A personal blog",
 	"homepage": "https://www.schwigri.com",
 	"license": "MIT",
 	"author": {
@@ -16,7 +16,7 @@
 		"build": "gatsby build",
 		"clean": "gatsby clean",
 		"develop": "gatsby develop",
-		"server": "gatsby server",
+		"serve": "gatsby serve",
 		"start": "gatsby develop",
 		"test": "jest"
 	},
