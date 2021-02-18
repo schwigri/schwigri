@@ -9,7 +9,9 @@ import { Helmet } from "react-helmet";
 import { Layout } from "../components/Layout";
 import { Locale } from "../.constants/localization.constants";
 import { PrismicContext } from "../.types/prismic.types";
+import { Provider } from "react-redux";
 import React from "react";
+import { createStore } from "./store.util";
 
 interface PageWrapperProps {
 	element: React.ReactNode;
@@ -60,4 +62,15 @@ export const wrapPageElement = ({
 			<Layout>{element}</Layout>
 		</Context.Provider>
 	);
+};
+
+interface RootWrapperProps {
+	element: React.ReactNode;
+}
+
+export const wrapRootElement = ({
+	element,
+}: RootWrapperProps): React.ReactElement => {
+	const store = createStore();
+	return <Provider store={store}>{element}</Provider>;
 };

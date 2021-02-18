@@ -10,7 +10,11 @@ type SlugContext =
 			seo?: {
 				title?: string;
 			};
+			translations?: {
+				[key in LanguageCode]?: string;
+			};
 			type: PageType;
+			uid?: string;
 	  };
 
 export const getHtmlTitle = (
@@ -62,6 +66,23 @@ export const getSlug = (context?: SlugContext, locale?: Locale): string => {
 	const prefix = LanguageCode.en === lang ? "/" : `/${lang}/`;
 
 	switch (context?.type) {
+		case "blog":
+			return `${prefix}blog`;
+
+		case "page":
+			if (context?.translations?.[lang]) {
+				return `${prefix}${context.translations[lang]}`;
+			} else if (context?.uid) {
+				return `${prefix}${context.uid}`;
+			}
+			return prefix;
+
+		case "privacy":
+			return `${prefix}${getTranslation("privacy-slug", locale)}`;
+
+		case "works":
+			return `${prefix}${getTranslation("works-slug", locale)}`;
+
 		default:
 			return prefix;
 	}

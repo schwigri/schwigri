@@ -9,7 +9,7 @@ import { get } from "lodash";
 
 export const getTranslation = (
 	id: string,
-	locale: Locale,
+	locale: Locale = Locale.en_US,
 	data?: { [key: string]: string }
 ): string => {
 	const translationId = TRANSLATION_IDS[id] || id;

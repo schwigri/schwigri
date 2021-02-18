@@ -5,11 +5,11 @@ export const TRANSLATION_IDS: { [key: string]: string } = {
 	ContinueReading: "continue-reading",
 	ContinueReadingTitle: "continue-reading-title",
 	Copyright: "copyright",
-	English: "english",
+	English: "en_US",
 	EnglishOnly: "english-only",
-	German: "german",
+	German: "de_CH",
 	HomeTitle: "home-title",
-	Japanese: "japanese",
+	Japanese: "ja_JP",
 	LatestPosts: "latest-posts",
 	LogoAlt: "logo-alt",
 	MadeWithLovePeaceReact: "made-with-love-peace-react",
@@ -50,13 +50,17 @@ export const TRANSLATIONS_ENGLISH: { [key: string]: string } = {
 };
 
 export const TRANSLATIONS_GERMAN: { [key: string]: string } = {
-	[TRANSLATION_IDS.Blog]: "das Blog",
+	[TRANSLATION_IDS.Blog]: "Blog",
 	[TRANSLATION_IDS.ContinueReadingTitle]: "«{title}» weiterlesen",
 	[TRANSLATION_IDS.German]: "Deutsch",
+	[TRANSLATION_IDS.Works]: "Portfolio",
+	[TRANSLATION_IDS.WorksSlug]: "portfolio",
 };
 
 export const TRANSLATIONS_JAPANESE: { [key: string]: string } = {
 	[TRANSLATION_IDS.Blog]: "ブログ",
 	[TRANSLATION_IDS.ContinueReadingTitle]: "「{title}」の続きを読む",
 	[TRANSLATION_IDS.Japanese]: "日本語",
+	[TRANSLATION_IDS.Works]: "実績",
+	[TRANSLATION_IDS.WorksSlug]: "jisseki",
 };
