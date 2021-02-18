@@ -1,3 +1,4 @@
+const path = require("path");
 require("dotenv").config({
 	path: `.env.${process.env.NODE_ENV}`,
 });
@@ -20,5 +21,14 @@ module.exports = {
 				shouldDownloadImage: () => true,
 			},
 		},
+		{
+			resolve: "gatsby-source-filesystem",
+			options: {
+				name: "graphics",
+				path: path.join(__dirname, "src", "graphics"),
+			},
+		},
+		"gatsby-plugin-sharp",
+		"gatsby-transformer-sharp",
 	],
 };
