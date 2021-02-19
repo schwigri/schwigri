@@ -8,6 +8,9 @@ module.exports = {
 		title: "Griffen Schwiesow",
 	},
 	plugins: [
+		"gatsby-plugin-sharp",
+		"gatsby-transformer-sharp",
+		"gatsby-plugin-styled-components",
 		{
 			resolve: "gatsby-source-prismic",
 			options: {
@@ -28,7 +31,5 @@ module.exports = {
 				path: path.join(__dirname, "src", "graphics"),
 			},
 		},
-		"gatsby-plugin-sharp",
-		"gatsby-transformer-sharp",
 	],
 };

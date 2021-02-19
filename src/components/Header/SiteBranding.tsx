@@ -1,6 +1,6 @@
 import Img, { FluidObject } from "gatsby-image";
 import { Context } from "../Context";
-import { Link } from "gatsby";
+import { Link } from "../Link";
 import { Locale } from "../../.constants/localization.constants";
 import React from "react";
 import styled from "styled-components";
@@ -62,11 +62,11 @@ class SiteBranding extends React.Component<Props> {
 						>
 							{Locale.ja_JP === context.locale ? (
 								<>
-									グリフィン<span className={""}>・シュヴィーゾー</span>
+									グリフィン<span className={"upon-lg"}>・シュヴィーゾー</span>
 								</>
 							) : (
 								<>
-									Griffen<span className={""}> Schwiesow</span>
+									Griffen<span className={"upon-sm"}> Schwiesow</span>
 								</>
 							)}
 						</Title>

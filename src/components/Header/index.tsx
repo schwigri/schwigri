@@ -10,7 +10,7 @@ const Content = styled("div")`
 	display: flex;
 	justify-content: space-between;
 	margin: 0 auto;
-	max-width: ${({ theme }): string => `${theme.sizes.content}px`};
+	max-width: ${({ theme }): string => theme.sizes.content};
 `;
 
 const Wrapper = styled("header")`

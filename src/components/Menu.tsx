@@ -1,9 +1,10 @@
-import { Link, StaticQuery, graphql } from "gatsby";
+import { StaticQuery, graphql } from "gatsby";
 import { StoreActions, StoreState } from "../.types/store.types";
 import { getLanguageCode, getSlug } from "../utils/localization.util";
 import { Button } from "./Button";
 import { Context } from "./Context";
 import { LangSwitcher } from "./LangSwitcher";
+import { Link } from "./Link";
 import { MenuIcon } from "./Icon";
 import { PrismicContext } from "../.types/prismic.types";
 import React from "react";
