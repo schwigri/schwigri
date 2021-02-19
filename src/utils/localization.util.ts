@@ -1,4 +1,10 @@
-import { LanguageCode, Locale } from "../.constants/localization.constants";
+import {
+	EnglishMonths,
+	GermanMonths,
+	JapaneseNumerals,
+	LanguageCode,
+	Locale,
+} from "../.constants/localization.constants";
 import { PageType, PrismicContext } from "../.types/prismic.types";
 import { getTranslation } from "./translation.util";
 
@@ -62,6 +68,7 @@ export const getLocale = (localeCode = ""): Locale => {
 };
 
 export const getSlug = (context?: SlugContext, locale?: Locale): string => {
+	console.log(context);
 	const lang = getLanguageCode(locale || context?.locale);
 	const prefix = LanguageCode.en === lang ? "/" : `/${lang}/`;
 
@@ -77,6 +84,16 @@ export const getSlug = (context?: SlugContext, locale?: Locale): string => {
 			}
 			return prefix;
 
+		case "post":
+			if (context?.date && context?.uid) {
+				const { uid } = context;
+				const date = new Date(context.date);
+				const year = date.getFullYear();
+				const month = date.getMonth() + 1;
+				return `${prefix}blog/${year}/${month}/${uid}`;
+			}
+			return prefix;
+
 		case "privacy":
 			return `${prefix}${getTranslation("privacy-slug", locale)}`;
 
@@ -85,5 +102,47 @@ export const getSlug = (context?: SlugContext, locale?: Locale): string => {
 
 		default:
 			return prefix;
+	}
+};
+
+const getJapaneseDate = (number: number): string => {
+	if (31 < number) return `${number}`;
+
+	if (11 > number) return JapaneseNumerals[number - 1];
+
+	const firstDigit = Math.floor(number / 10);
+	const secondDigit = number % 10;
+
+	let result = 1 < firstDigit ? JapaneseNumerals[firstDigit - 1] : "";
+	result += JapaneseNumerals[9];
+	if (0 !== secondDigit) {
+		result += JapaneseNumerals[secondDigit - 1];
+	}
+
+	return result;
+};
+
+const getJapaneseYear = (number: number): string => {
+	const year = number - 2018;
+	const jaYear = 1 === year ? "元" : getJapaneseDate(year);
+	return `令和${jaYear}年`;
+};
+
+export const formatDate = (date: Date, locale: Locale): string => {
+	const day = date.getDate();
+	const month = date.getMonth();
+	const year = date.getFullYear();
+
+	switch (locale) {
+		case "de_CH":
+			return `${day}. ${GermanMonths[month]} ${year}`;
+
+		case "ja_JP":
+			return `${getJapaneseYear(year)}${getJapaneseDate(
+				month + 1
+			)}月${getJapaneseDate(day)}日`;
+
+		default:
+			return `${EnglishMonths[month]} ${day}, ${year}`;
 	}
 };

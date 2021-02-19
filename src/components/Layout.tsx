@@ -4,6 +4,7 @@ import styled, {
 	ThemeProvider,
 	createGlobalStyle,
 } from "styled-components";
+import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { LangSwitcher } from "./LangSwitcher";
 import React from "react";
@@ -30,6 +31,11 @@ const MainWrapper = styled("main")`
 		max-width: ${({ theme }): string => `${theme.sizes.copy}px`};
 		padding-left: 1.6rem;
 		padding-right: 1.6rem;
+
+		@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
+			padding-left: 3.2rem;
+			padding-right: 3.2rem;
+		}
 	}
 
 	pre {
@@ -44,16 +50,15 @@ const MainWrapper = styled("main")`
 const TopBarContent = styled("div")`
 	font-size: 0.9em;
 	margin: 0 auto;
-	max-width: ${({ theme }): string => `${theme.sizes.content}px`};
+	max-width: ${({ theme }): string => theme.sizes.content};
 	text-align: right;
 `;
 
 const TopBar = styled("aside")`
 	background-color: ${({ theme }): string => theme.colors.background};
 	color: ${({ theme }): string => theme.colors.copy};
-	padding: 0.5em 1em;
-	padding-left: max(1em, env(safe-area-inset-left));
-	padding-right: max(1em, env(safe-area-inset-right));
+	padding: 0.5em max(1em, env(safe-area-inset-left)) 0.5em
+		max(1em, env(safe-area-inset-right));
 	z-index: 4;
 
 	@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
@@ -163,6 +168,12 @@ const GlobalStyle = createGlobalStyle`
 			display: none;
 		}
 	}
+
+	.upon-lg {
+		@media (max-width: ${({ theme }): string => `${theme.breakpoints.lg - 1}px`}) {
+			display: none;
+		}
+	}
 `;
 
 interface Props {
@@ -212,6 +223,8 @@ class Layout extends React.Component<Props, State> {
 				<MainWrapper>
 					<MainContent>{children}</MainContent>
 				</MainWrapper>
+
+				<Footer />
 			</ThemeProvider>
 		);
 	}

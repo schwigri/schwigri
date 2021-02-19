@@ -53,6 +53,9 @@ export const TRANSLATIONS_GERMAN: { [key: string]: string } = {
 	[TRANSLATION_IDS.Blog]: "Blog",
 	[TRANSLATION_IDS.ContinueReadingTitle]: "«{title}» weiterlesen",
 	[TRANSLATION_IDS.German]: "Deutsch",
+	[TRANSLATION_IDS.LatestPosts]: "Neueste Beiträge",
+	[TRANSLATION_IDS.Privacy]: "Datenschutzerklärung",
+	[TRANSLATION_IDS.PrivacySlug]: "datenschutzerklaerung",
 	[TRANSLATION_IDS.Works]: "Portfolio",
 	[TRANSLATION_IDS.WorksSlug]: "portfolio",
 };
@@ -61,6 +64,9 @@ export const TRANSLATIONS_JAPANESE: { [key: string]: string } = {
 	[TRANSLATION_IDS.Blog]: "ブログ",
 	[TRANSLATION_IDS.ContinueReadingTitle]: "「{title}」の続きを読む",
 	[TRANSLATION_IDS.Japanese]: "日本語",
+	[TRANSLATION_IDS.LatestPosts]: "最新の投稿",
+	[TRANSLATION_IDS.Privacy]: "プライバシー",
+	[TRANSLATION_IDS.PrivacySlug]: "privacy",
 	[TRANSLATION_IDS.Works]: "実績",
 	[TRANSLATION_IDS.WorksSlug]: "jisseki",
 };
