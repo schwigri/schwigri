@@ -20,6 +20,7 @@ exports.createPages = async ({ actions, graphql }) => {
 		}
 	`);
 
+	// Homepages
 	result.data.homepages.edges.forEach(({ node }) => {
 		const { id, lang } = node;
 		const langCode = lang.split("-")[0];
@@ -33,6 +34,18 @@ exports.createPages = async ({ actions, graphql }) => {
 				type: "homepage",
 			},
 			path: permalink,
+		});
+	});
+
+	// Blog pages
+	["en", "de", "ja"].forEach(lang => {
+		const prefix = "en" === lang ? "/" : `/${lang}/`;
+		const path = `${prefix}blog`;
+
+		createPage({
+			component: require.resolve("./src/templates/blog.tsx"),
+			context: { locale: lang, type: "blog" },
+			path,
 		});
 	});
 };

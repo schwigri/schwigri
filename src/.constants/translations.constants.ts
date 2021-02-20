@@ -16,6 +16,7 @@ export const TRANSLATION_IDS: { [key: string]: string } = {
 	OpenMenu: "open-menu",
 	Privacy: "privacy",
 	PrivacySlug: "privacy-slug",
+	ProfilePhotoAlt: "profile-photo-alt",
 	SeeMorePosts: "see-more-posts",
 	Title: "title",
 	Untitled: "untitled",
@@ -42,6 +43,7 @@ export const TRANSLATIONS_ENGLISH: { [key: string]: string } = {
 	[TRANSLATION_IDS.OpenMenu]: "Open menu",
 	[TRANSLATION_IDS.Privacy]: "Privacy",
 	[TRANSLATION_IDS.PrivacySlug]: "privacy",
+	[TRANSLATION_IDS.ProfilePhotoAlt]: "Me, enjoying the cherry blossoms",
 	[TRANSLATION_IDS.SeeMorePosts]: "See more posts",
 	[TRANSLATION_IDS.Title]: "{title} — Griffen Schwiesow",
 	[TRANSLATION_IDS.Untitled]: "Untitled",
@@ -51,22 +53,26 @@ export const TRANSLATIONS_ENGLISH: { [key: string]: string } = {
 
 export const TRANSLATIONS_GERMAN: { [key: string]: string } = {
 	[TRANSLATION_IDS.Blog]: "Blog",
+	[TRANSLATION_IDS.ContinueReading]: "Weiterlesen",
 	[TRANSLATION_IDS.ContinueReadingTitle]: "«{title}» weiterlesen",
 	[TRANSLATION_IDS.German]: "Deutsch",
 	[TRANSLATION_IDS.LatestPosts]: "Neueste Beiträge",
 	[TRANSLATION_IDS.Privacy]: "Datenschutzerklärung",
 	[TRANSLATION_IDS.PrivacySlug]: "datenschutzerklaerung",
+	[TRANSLATION_IDS.SeeMorePosts]: "Weitere Beiträge",
 	[TRANSLATION_IDS.Works]: "Portfolio",
 	[TRANSLATION_IDS.WorksSlug]: "portfolio",
 };
 
 export const TRANSLATIONS_JAPANESE: { [key: string]: string } = {
 	[TRANSLATION_IDS.Blog]: "ブログ",
+	[TRANSLATION_IDS.ContinueReading]: "続きを読む",
 	[TRANSLATION_IDS.ContinueReadingTitle]: "「{title}」の続きを読む",
 	[TRANSLATION_IDS.Japanese]: "日本語",
 	[TRANSLATION_IDS.LatestPosts]: "最新の投稿",
 	[TRANSLATION_IDS.Privacy]: "プライバシー",
 	[TRANSLATION_IDS.PrivacySlug]: "privacy",
+	[TRANSLATION_IDS.SeeMorePosts]: "投稿の一覧へ",
 	[TRANSLATION_IDS.Works]: "実績",
 	[TRANSLATION_IDS.WorksSlug]: "jisseki",
 };
