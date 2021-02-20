@@ -78,3 +78,10 @@ export interface PrismicPost extends PrismicItem {
 		title?: PrismicText;
 	};
 }
+
+export interface PrismicHomepage extends PrismicItem {
+	data?: {
+		description?: PrismicText;
+		title?: PrismicText;
+	};
+}

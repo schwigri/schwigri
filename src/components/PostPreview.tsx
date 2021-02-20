@@ -4,7 +4,12 @@ import { Link } from "./Link";
 import { PrismicPost } from "../.types/prismic.types";
 import React from "react";
 import { RichText } from "prismic-reactjs";
+import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
+
+const TitleLink = styled(Link)`
+	color: inherit;
+`;
 
 const PostDate = styled("time")`
 	display: flex;
@@ -26,7 +31,11 @@ const Wrapper = styled("article")`
 	overflow: hidden;
 
 	h1 {
-		margin: 0 0 1.6rem;
+		margin: 0 0 0.8rem;
+		padding: 0 1.6rem;
+	}
+
+	p {
 		padding: 0 1.6rem;
 	}
 `;
@@ -39,7 +48,7 @@ interface Props {
 class PostPreview extends React.Component<Props> {
 	render(): React.ReactNode {
 		const { className, post } = this.props;
-		const { featuredImage, title } = post.data || {};
+		const { excerpt, featuredImage, title } = post.data || {};
 		const locale = getLocale(post.lang);
 		const slug = getSlug(
 			{
@@ -71,8 +80,24 @@ class PostPreview extends React.Component<Props> {
 					<PostDate dateTime={date.toISOString()}>
 						{formatDate(date, locale)}
 					</PostDate>
+
+					<TitleLink to={slug}>
+						<RichText render={title?.raw} />
+					</TitleLink>
 				</header>
-				<RichText render={title?.raw} />
+
+				{excerpt && <p>{excerpt}</p>}
+
+				<p>
+					<Link
+						aria-label={getTranslation("continue-reading-title", locale, {
+							title: title?.text || getTranslation("untitled", locale)
+						})}
+						to={slug}
+					>
+						{getTranslation("continue-reading", locale)}
+					</Link>
+				</p>
 			</Wrapper>
 		);
 	}

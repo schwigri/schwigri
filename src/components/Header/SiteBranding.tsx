@@ -48,7 +48,7 @@ class SiteBranding extends React.Component<Props> {
 		return (
 			<Context.Consumer>
 				{(context): React.ReactElement => (
-					<Wrapper to={getSlug(context.pageContext)}>
+					<Wrapper to={getSlug({ locale: context.locale, type: "homepage" })}>
 						<Logo>
 							<Img
 								alt={getTranslation("logo-alt", context.locale)}

@@ -68,7 +68,6 @@ export const getLocale = (localeCode = ""): Locale => {
 };
 
 export const getSlug = (context?: SlugContext, locale?: Locale): string => {
-	console.log(context);
 	const lang = getLanguageCode(locale || context?.locale);
 	const prefix = LanguageCode.en === lang ? "/" : `/${lang}/`;
 
