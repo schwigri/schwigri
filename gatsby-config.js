@@ -65,6 +65,7 @@ module.exports = {
 					},
 				},
 				host: "https://www.schwigri.com",
+				resolveEnv: () => NETLIFY_ENV,
 				sitemap: "https://www.schwigri.com/sitemap.xml",
 			},
 		},
