@@ -2,11 +2,9 @@ import { Carousel, CarouselItem, CarouselTrack } from "../components/Carousel";
 import Img, { FluidObject } from "gatsby-image";
 import { PrismicHomepage, PrismicPost } from "../.types/prismic.types";
 import { Context } from "../components/Context";
-import { Link } from "../components/Link";
 import { PostPreview } from "../components/PostPreview";
 import React from "react";
 import { RichText } from "prismic-reactjs";
-import { getSlug } from "../utils/localization.util";
 import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
 import styled from "styled-components";
@@ -48,20 +46,6 @@ const FeaturedWrapper = styled("section")`
 	}
 `;
 
-const SeeMore = styled(Link)`
-	align-items: center;
-	border: 0;
-	border-radius: 0.5em;
-	box-shadow: ${({ theme }): string =>
-		`0 0 1px ${theme.colors.separatorShadow}`};
-	display: flex;
-	font-family: ${({ theme }): string => theme.fonts.heading};
-	font-size: 1.4em;
-	height: 100%;
-	justify-content: center;
-	width: 100%;
-`;
-
 const LatestPost = styled(CarouselItem)`
 	margin: 1px;
 	padding-left: 1em;
@@ -84,6 +68,7 @@ const LatestPost = styled(CarouselItem)`
 	}
 
 	@media (min-width: ${({ theme }): string => `${theme.breakpoints.lg}px`}) {
+		margin: 0;
 		padding-left: 0;
 		width: 100%;
 
@@ -93,19 +78,19 @@ const LatestPost = styled(CarouselItem)`
 	}
 `;
 
-interface LatestPostsProps {
-	$count: number;
-}
-
-const LatestPosts = styled(Carousel)<LatestPostsProps>`
+const LatestPosts = styled(Carousel)`
 	margin: 1em 0;
+
+	@media (min-width: ${({ theme }): string => `${theme.breakpoints.lg}px`}) {
+		overflow: visible;
+	}
 
 	${CarouselTrack} {
 		@media (min-width: ${({ theme }): string => `${theme.breakpoints.lg}px`}) {
 			display: grid;
 			gap: 2em;
-			grid-template-columns: ${({ $count }): string =>
-				`repeat(${$count}, 1fr)`};
+			grid-template-columns: repeat(3, 1fr);
+			overflow: visible;
 		}
 	}
 `;
@@ -148,31 +133,6 @@ class HomepageTemplate extends React.Component<Props> {
 			<Context.Consumer>
 				{(context): React.ReactElement => (
 					<>
-						{posts.length && (
-							<LatestPostsSection>
-								<h2>{getTranslation("latest-posts", context.locale)}</h2>
-								<LatestPosts
-									$count={Math.min(Math.max(posts.length + 1, 3), 4)}
-								>
-									{posts.map(
-										({ node }): React.ReactElement => (
-											<LatestPost key={node.id}>
-												<PostPreview post={node} />
-											</LatestPost>
-										)
-									)}
-
-									<LatestPost>
-										<SeeMore
-											to={getSlug({ locale: context.locale, type: "blog" })}
-										>
-											{getTranslation("see-more-posts", context.locale)}
-										</SeeMore>
-									</LatestPost>
-								</LatestPosts>
-							</LatestPostsSection>
-						)}
-
 						<FeaturedWrapper>
 							<FeaturedImage>
 								<Img
@@ -184,10 +144,29 @@ class HomepageTemplate extends React.Component<Props> {
 							<FeaturedContent>
 								<RichText render={homepage.data?.title?.raw} />
 								{homepage.data?.description?.text && (
-									<p dangerouslySetInnerHTML={{ __html: homepage.data.description.text }} />
+									<p
+										dangerouslySetInnerHTML={{
+											__html: homepage.data.description.text,
+										}}
+									/>
 								)}
 							</FeaturedContent>
 						</FeaturedWrapper>
+
+						{posts.length && (
+							<LatestPostsSection>
+								<h2>{getTranslation("latest-posts", context.locale)}</h2>
+								<LatestPosts>
+									{posts.map(
+										({ node }): React.ReactElement => (
+											<LatestPost key={node.id}>
+												<PostPreview post={node} />
+											</LatestPost>
+										)
+									)}
+								</LatestPosts>
+							</LatestPostsSection>
+						)}
 					</>
 				)}
 			</Context.Consumer>
@@ -209,7 +188,11 @@ export const query = graphql`
 				}
 			}
 		}
-		posts: allPrismicPost(limit: 3, filter: { lang: { eq: $locale } }) {
+		posts: allPrismicPost(
+			limit: 3
+			filter: { lang: { eq: $locale } }
+			sort: { order: DESC, fields: first_publication_date }
+		) {
 			edges {
 				node {
 					data {
