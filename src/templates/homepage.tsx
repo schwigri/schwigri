@@ -215,7 +215,7 @@ export const query = graphql`
 									localFile {
 										childImageSharp {
 											fluid(maxWidth: 720) {
-												...GatsbyImageSharpFluid
+												...GatsbyImageSharpFluid_withWebp
 											}
 										}
 									}
@@ -237,7 +237,7 @@ export const query = graphql`
 		profilePhoto: file(relativePath: { eq: "profile.jpeg" }) {
 			childImageSharp {
 				fluid(maxWidth: 700) {
-					...GatsbyImageSharpFluid
+					...GatsbyImageSharpFluid_withWebp
 				}
 			}
 		}
