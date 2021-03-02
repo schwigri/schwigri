@@ -73,8 +73,16 @@ module.exports = {
 			resolve: "gatsby-plugin-manifest",
 			options: {
 				background_color: "#ffffff",
-				display: "browser",
+				display: "standalone",
 				icon: path.join(__dirname, "src", "graphics", "icon.png"),
+				icons: [
+					{
+						purpose: "any maskable",
+						src: path.join(__dirname, "src", "graphics", "maskable-icon.png"),
+						sizes: "512x512",
+						type: "image/png",
+					},
+				],
 				lang: "en",
 				name: "Griffen Schwiesow",
 				short_name: "Griffen",
@@ -102,23 +110,6 @@ module.exports = {
 			},
 		},
 		"gatsby-plugin-sitemap",
-		{
-			resolve: "gatsby-plugin-offline",
-			options: {
-				workboxConfig: {
-					globPatterns: ["**/icon-path*"],
-					runtimeCaching: [
-						{
-							handler: "NetworkFirst",
-							urlPattern: /^https?:.*\/page-data\/app-data\.json/,
-						},
-						{
-							handler: "NetworkFirst",
-							urlPattern: /^https?:.*\/page-data\/.*\/page-data\.json/,
-						},
-					],
-				},
-			},
-		},
+		"gatsby-plugin-offline",
 	],
 };
