@@ -10,7 +10,12 @@ module.exports = {
 	plugins: [
 		"gatsby-plugin-sharp",
 		"gatsby-transformer-sharp",
-		"gatsby-plugin-styled-components",
+		{
+			resolve: "gatsby-plugin-styled-components",
+			options: {
+				displayName: "development" === process.env.NODE_ENV,
+			},
+		},
 		{
 			resolve: "gatsby-source-prismic",
 			options: {
@@ -31,5 +36,38 @@ module.exports = {
 				path: path.join(__dirname, "src", "graphics"),
 			},
 		},
+		{
+			resolve: "gatsby-plugin-manifest",
+			options: {
+				background_color: "#ffffff",
+				display: "browser",
+				icon: path.join(__dirname, "src", "graphics", "icon.png"),
+				lang: "en",
+				name: "Griffen Schwiesow",
+				short_name: "Griffen",
+				start_url: "/",
+				theme_color: "#1467ff",
+				localize: [
+					{
+						lang: "de",
+						start_url: "/de/",
+					},
+					{
+						lang: "ja",
+						name: "グリフィン・シュヴィーゾー",
+						short_name: "グリフィン",
+						start_url: "/ja/",
+					},
+				],
+			},
+		},
+		{
+			resolve: "@rhysforyou/gatsby-plugin-safari-site-icon",
+			options: {
+				color: "#1467ff",
+				icon: path.join(__dirname, "src", "graphics", "icon.svg"),
+			},
+		},
+		"gatsby-plugin-offline",
 	],
 };

@@ -30,6 +30,12 @@ const FeaturedImage = styled("div")`
 	box-shadow: ${({ theme }): string =>
 		`0 0 1px ${theme.colors.separatorShadow}`};
 	overflow: hidden;
+	width: 100%;
+`;
+
+const FeaturedImageWrapper = styled("div")`
+	align-items: center;
+	display: flex;
 `;
 
 const FeaturedWrapper = styled("section")`
@@ -40,8 +46,11 @@ const FeaturedWrapper = styled("section")`
 	padding: 0 1em;
 
 	@media (min-width: ${({ theme }): string => `${theme.breakpoints.sm}px`}) {
-		gap: 2em;
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
+		gap: 2em;
 		padding: 0 2em;
 	}
 `;
@@ -134,12 +143,14 @@ class HomepageTemplate extends React.Component<Props> {
 				{(context): React.ReactElement => (
 					<>
 						<FeaturedWrapper>
-							<FeaturedImage>
-								<Img
-									alt={getTranslation("profile-photo-alt", context.locale)}
-									fluid={profilePhoto.childImageSharp.fluid}
-								/>
-							</FeaturedImage>
+							<FeaturedImageWrapper>
+								<FeaturedImage>
+									<Img
+										alt={getTranslation("profile-photo-alt", context.locale)}
+										fluid={profilePhoto.childImageSharp.fluid}
+									/>
+								</FeaturedImage>
+							</FeaturedImageWrapper>
 
 							<FeaturedContent>
 								<RichText render={homepage.data?.title?.raw} />
