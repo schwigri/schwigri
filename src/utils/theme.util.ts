@@ -21,7 +21,7 @@ const baseTheme = {
 export const darkTheme: DefaultTheme = {
 	...baseTheme,
 	colors: {
-		accent: "#fff8db",
+		accent: "#fffae6",
 		background: "#111",
 		copy: "#fff",
 		linkBorder: "rgba(255, 248, 219, 0.15)",
@@ -34,7 +34,7 @@ export const darkTheme: DefaultTheme = {
 export const lightTheme: DefaultTheme = {
 	...baseTheme,
 	colors: {
-		accent: "#1467ff",
+		accent: "#125be1",
 		background: "#fff",
 		copy: "#333",
 		linkBorder: "rgba(20, 103, 255, 0.15)",
