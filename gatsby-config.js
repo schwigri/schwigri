@@ -1,10 +1,27 @@
+const {
+	NODE_ENV,
+	URL: NETLIFY_SITE_URL = "https://www.schwigri.com",
+	DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
+	CONTEXT: NETLIFY_ENV = NODE_ENV,
+} = process.env;
+
+const siteUrl =
+	"production" === NETLIFY_ENV ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
+
 const path = require("path");
 require("dotenv").config({
-	path: `.env.${process.env.NODE_ENV}`,
+	path: `.env.${NODE_ENV}`,
 });
+
+const disallowedPolicy = {
+	host: null,
+	policy: [{ disallow: ["/"], userAgent: "*" }],
+	sitemap: null,
+};
 
 module.exports = {
 	siteMetadata: {
+		siteUrl,
 		title: "Griffen Schwiesow",
 	},
 	plugins: [
@@ -34,6 +51,21 @@ module.exports = {
 			options: {
 				name: "graphics",
 				path: path.join(__dirname, "src", "graphics"),
+			},
+		},
+		{
+			resolve: "gatsby-plugin-robots-txt",
+			options: {
+				env: {
+					"branch-deploy": { ...disallowedPolicy },
+					"deploy-preview": { ...disallowedPolicy },
+					development: { ...disallowedPolicy },
+					production: {
+						policy: [{ allow: "/", userAgent: "*" }],
+					},
+				},
+				host: "https://www.schwigri.com",
+				sitemap: "https://www.schwigri.com/sitemap.xml",
 			},
 		},
 		{
@@ -68,6 +100,7 @@ module.exports = {
 				icon: path.join(__dirname, "src", "graphics", "icon.svg"),
 			},
 		},
+		"gatsby-plugin-sitemap",
 		"gatsby-plugin-offline",
 	],
 };
