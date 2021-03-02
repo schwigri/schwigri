@@ -9,7 +9,7 @@ const CarouselItem = styled("div")`
 const CarouselTrack = styled("div")`
 	display: flex;
 	scroll-snap-type: x mandatory;
-	overflow-x: scroll;
+	overflow-x: auto;
 	overflow-y: hidden;
 `;
 
