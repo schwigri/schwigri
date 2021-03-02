@@ -1,8 +1,8 @@
 // Require fonts
-require("@fontsource/work-sans/latin-ext-400.css");
-require("@fontsource/work-sans/latin-ext-500.css");
-require("@fontsource/prompt/latin-ext-400.css");
-require("@fontsource/prompt/latin-ext-500.css");
+require("@fontsource/work-sans/latin-400.css");
+require("@fontsource/work-sans/latin-500.css");
+require("@fontsource/prompt/latin-400.css");
+require("@fontsource/prompt/latin-500.css");
 require("@fontsource/m-plus-1p/japanese-400.css");
 require("@fontsource/m-plus-1p/japanese-500.css");
 
