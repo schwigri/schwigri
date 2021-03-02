@@ -25,6 +25,7 @@ module.exports = {
 		title: "Griffen Schwiesow",
 	},
 	plugins: [
+		"gatsby-plugin-image",
 		"gatsby-plugin-sharp",
 		"gatsby-transformer-sharp",
 		{
@@ -100,13 +101,6 @@ module.exports = {
 						start_url: "/ja/",
 					},
 				],
-			},
-		},
-		{
-			resolve: "@rhysforyou/gatsby-plugin-safari-site-icon",
-			options: {
-				color: "#1467ff",
-				icon: path.join(__dirname, "src", "graphics", "icon.svg"),
 			},
 		},
 		"gatsby-plugin-sitemap",

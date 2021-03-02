@@ -1,5 +1,5 @@
 import { StaticQuery, graphql } from "gatsby";
-import { FluidObject } from "gatsby-image";
+import { IGatsbyImageData } from "gatsby-plugin-image";
 import { Menu } from "../Menu";
 import React from "react";
 import { SiteBranding } from "./SiteBranding";
@@ -29,17 +29,13 @@ const Wrapper = styled("header")`
 
 interface Props {
 	data: {
-		file: {
-			childImageSharp: {
-				fluid: FluidObject;
-			};
-		};
+		file: IGatsbyImageData;
 	};
 }
 
 class Header extends React.Component<Props> {
 	render(): React.ReactNode {
-		const logo = this.props.data.file.childImageSharp.fluid;
+		const logo = this.props.data.file;
 
 		return (
 			<Wrapper>
@@ -58,9 +54,7 @@ function getHeader(): React.ReactElement {
 		query HeaderQuery {
 			file(relativePath: { eq: "icon.png" }) {
 				childImageSharp {
-					fluid(maxWidth: 100) {
-						...GatsbyImageSharpFluid
-					}
+					gatsbyImageData(placeholder: BLURRED, layout: FIXED, width: 40)
 				}
 			}
 		}

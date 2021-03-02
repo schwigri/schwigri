@@ -1,5 +1,5 @@
-import { getLocale, getSlug, formatDate } from "../utils/localization.util";
-import Img from "gatsby-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { formatDate, getLocale, getSlug } from "../utils/localization.util";
 import { Link } from "./Link";
 import { PrismicPost } from "../.types/prismic.types";
 import React from "react";
@@ -21,6 +21,8 @@ const PostDate = styled("time")`
 
 const ThumbnailLink = styled(Link)`
 	border: 0;
+	display: block;
+	line-height: 0;
 `;
 
 const Wrapper = styled("article")`
@@ -61,19 +63,16 @@ class PostPreview extends React.Component<Props> {
 		);
 		const date = new Date(post.firstPublicationDate || "");
 
+		const postImage =
+			featuredImage?.thumbnails?.mobileCard?.localFile &&
+			getImage(featuredImage.thumbnails?.mobileCard?.localFile);
+
 		return (
 			<Wrapper className={className}>
 				<header>
-					{featuredImage?.thumbnails?.mobileCard?.localFile?.childImageSharp
-						?.fluid && (
+					{postImage && (
 						<ThumbnailLink to={slug}>
-							<Img
-								alt={featuredImage.alt}
-								fluid={
-									featuredImage.thumbnails.mobileCard.localFile.childImageSharp
-										.fluid
-								}
-							/>
+							<GatsbyImage alt={featuredImage?.alt || ""} image={postImage} />
 						</ThumbnailLink>
 					)}
 
@@ -91,7 +90,7 @@ class PostPreview extends React.Component<Props> {
 				<p>
 					<Link
 						aria-label={getTranslation("continue-reading-title", locale, {
-							title: title?.text || getTranslation("untitled", locale)
+							title: title?.text || getTranslation("untitled", locale),
 						})}
 						to={slug}
 					>

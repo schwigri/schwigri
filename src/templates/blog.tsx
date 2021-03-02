@@ -105,9 +105,7 @@ export const query = graphql`
 								mobileCard: mobile_card {
 									localFile {
 										childImageSharp {
-											fluid(maxWidth: 720) {
-												...GatsbyImageSharpFluid_withWebp
-											}
+											gatsbyImageData(placeholder: BLURRED, width: 720)
 										}
 									}
 								}
