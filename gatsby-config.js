@@ -102,6 +102,23 @@ module.exports = {
 			},
 		},
 		"gatsby-plugin-sitemap",
-		"gatsby-plugin-offline",
+		{
+			resolve: "gatsby-plugin-offline",
+			options: {
+				workboxConfig: {
+					globPatterns: ["**/icon-path*"],
+					runtimeCaching: [
+						{
+							handler: "NetworkFirst",
+							urlPattern: /^https?:.*\/page-data\/app-data\.json/,
+						},
+						{
+							handler: "NetworkFirst",
+							urlPattern: /^https?:.*\/page-data\/.*\/page-data\.json/,
+						},
+					],
+				},
+			},
+		},
 	],
 };
