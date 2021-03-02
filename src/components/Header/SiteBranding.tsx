@@ -1,4 +1,4 @@
-import Img, { FluidObject } from "gatsby-image";
+import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
 import { Context } from "../Context";
 import { Link } from "../Link";
 import { Locale } from "../../.constants/localization.constants";
@@ -38,24 +38,26 @@ const Wrapper = styled(Link)`
 `;
 
 interface Props {
-	logo: FluidObject;
+	logo: IGatsbyImageData;
 }
 
 class SiteBranding extends React.Component<Props> {
 	render(): React.ReactNode {
-		const { logo } = this.props;
+		const logo = getImage(this.props.logo);
 
 		return (
 			<Context.Consumer>
 				{(context): React.ReactElement => (
 					<Wrapper to={getSlug({ locale: context.locale, type: "homepage" })}>
-						<Logo>
-							<Img
-								alt={getTranslation("logo-alt", context.locale)}
-								fluid={logo}
-								loading={"eager"}
-							/>
-						</Logo>
+						{logo && (
+							<Logo>
+								<GatsbyImage
+									alt={getTranslation("logo-alt", context.locale)}
+									image={logo}
+									loading={"eager"}
+								/>
+							</Logo>
+						)}
 
 						<Title
 							as={"homepage" === context.pageContext?.type ? "h1" : "span"}

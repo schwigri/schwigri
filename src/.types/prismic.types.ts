@@ -1,4 +1,4 @@
-import { FixedObject, FluidObject } from "gatsby-image";
+import { IGatsbyImageData } from "gatsby-plugin-image";
 import { LanguageCode } from "../.constants/localization.constants";
 import { RichTextBlock } from "prismic-reactjs";
 
@@ -57,20 +57,10 @@ export interface PrismicPost extends PrismicItem {
 		featuredImage?: {
 			alt?: string;
 			copyright?: string;
-			localFile?: {
-				childImageSharp?: {
-					fixed?: FixedObject;
-					fluid?: FluidObject;
-				};
-			};
+			localFile?: IGatsbyImageData;
 			thumbnails?: {
 				mobileCard?: {
-					localFile?: {
-						childImageSharp?: {
-							fixed?: FixedObject;
-							fluid?: FluidObject;
-						};
-					};
+					localFile?: IGatsbyImageData;
 				};
 			};
 		};

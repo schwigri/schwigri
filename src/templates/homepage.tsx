@@ -1,5 +1,5 @@
 import { Carousel, CarouselItem, CarouselTrack } from "../components/Carousel";
-import Img, { FluidObject } from "gatsby-image";
+import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
 import { PrismicHomepage, PrismicPost } from "../.types/prismic.types";
 import { Context } from "../components/Context";
 import { PostPreview } from "../components/PostPreview";
@@ -25,7 +25,7 @@ const FeaturedContent = styled("div")`
 	}
 `;
 
-const FeaturedImage = styled("div")`
+const FeaturedImage = styled(GatsbyImage)`
 	border-radius: 0.5em;
 	box-shadow: ${({ theme }): string =>
 		`0 0 1px ${theme.colors.separatorShadow}`};
@@ -125,11 +125,7 @@ interface Props {
 				node: PrismicPost;
 			}[];
 		};
-		profilePhoto: {
-			childImageSharp: {
-				fluid: FluidObject;
-			};
-		};
+		profilePhoto: IGatsbyImageData;
 	};
 }
 
@@ -138,19 +134,22 @@ class HomepageTemplate extends React.Component<Props> {
 		const posts = this.props.data.posts.edges;
 		const { homepage, profilePhoto } = this.props.data;
 
+		const featuredImage = getImage(profilePhoto);
+
 		return (
 			<Context.Consumer>
 				{(context): React.ReactElement => (
 					<>
 						<FeaturedWrapper>
-							<FeaturedImageWrapper>
-								<FeaturedImage>
-									<Img
+							{featuredImage && (
+								<FeaturedImageWrapper>
+									<FeaturedImage
 										alt={getTranslation("profile-photo-alt", context.locale)}
-										fluid={profilePhoto.childImageSharp.fluid}
+										image={featuredImage}
+										loading={"eager"}
 									/>
-								</FeaturedImage>
-							</FeaturedImageWrapper>
+								</FeaturedImageWrapper>
+							)}
 
 							<FeaturedContent>
 								<RichText render={homepage.data?.title?.raw} />
@@ -214,9 +213,7 @@ export const query = graphql`
 								mobileCard: mobile_card {
 									localFile {
 										childImageSharp {
-											fluid(maxWidth: 720) {
-												...GatsbyImageSharpFluid_withWebp
-											}
+											gatsbyImageData(placeholder: BLURRED, width: 720)
 										}
 									}
 								}
@@ -236,9 +233,7 @@ export const query = graphql`
 		}
 		profilePhoto: file(relativePath: { eq: "profile.jpeg" }) {
 			childImageSharp {
-				fluid(maxWidth: 700) {
-					...GatsbyImageSharpFluid_withWebp
-				}
+				gatsbyImageData(placeholder: BLURRED, width: 700)
 			}
 		}
 	}

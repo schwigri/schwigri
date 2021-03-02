@@ -9,7 +9,6 @@
 		"plugin:jsx-a11y/recommended",
 		"plugin:prettier/recommended",
 		"plugin:react/recommended",
-		"react-app"
 	],
 	"overrides": [
 		{
@@ -26,6 +25,7 @@
 			"plugins": ["@typescript-eslint"]
 		}
 	],
+	"parser": "@babel/eslint-parser",
 	"plugins": [
 		"prettier",
 		"react"
