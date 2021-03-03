@@ -37,6 +37,7 @@ const FeaturedImage = styled(GatsbyImage)`
 		`0 0 1px ${theme.colors.separatorShadow}`};
 	overflow: hidden;
 	width: 100%;
+	z-index: 0;
 `;
 
 const FeaturedImageWrapper = styled("div")`
