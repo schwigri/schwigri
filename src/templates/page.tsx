@@ -1,9 +1,27 @@
 import { Context } from "../components/Context";
 import { PrismicPage } from "../.types/prismic.types";
 import React from "react";
+import { RichText } from "prismic-reactjs";
 import { Seo } from "../components/Seo";
 import { getSrc } from "gatsby-plugin-image";
 import { graphql } from "gatsby";
+import styled from "styled-components";
+
+const Content = styled("div")`
+	margin: 4em auto;
+	max-width: ${({ theme }): string => theme.sizes.copy};
+`;
+
+const Meta = styled("div")`
+	color: ${({ theme }): string => theme.colors.subtitle};
+	font-family: ${({ theme }): string => theme.fonts.heading};
+	font-size: 1.2em;
+`;
+
+const Header = styled("div")`
+	margin: 4em 0;
+	text-align: center;
+`;
 
 interface Props {
 	data: {
@@ -39,7 +57,19 @@ class PageTemplate extends React.Component<Props> {
 							title={page.data?.seoTitle || ""}
 						/>
 
-						<p>Page</p>
+						<Header>
+							<RichText render={page.data?.title?.raw} />
+
+							{page.data?.subtitle?.raw && (
+								<Meta>
+									<RichText render={page.data.subtitle.raw} />
+								</Meta>
+							)}
+						</Header>
+
+						<Content>
+							<RichText render={page.data?.content?.raw} />
+						</Content>
 					</>
 				)}
 			</Context.Consumer>
@@ -53,8 +83,17 @@ export const query = graphql`
 	query PageTemplateQuery($id: String!) {
 		page: prismicPage(id: { eq: $id }) {
 			data {
+				content {
+					raw
+				}
 				seoDescription: seo_description
 				seoTitle: seo_title
+				subtitle {
+					raw
+				}
+				title {
+					raw
+				}
 			}
 		}
 	}

@@ -14,7 +14,7 @@ const baseTheme = {
 	},
 	sizes: {
 		content: "1220px",
-		copy: "620px",
+		copy: "700px",
 	},
 };
 
@@ -26,7 +26,7 @@ export const darkTheme: DefaultTheme = {
 		copy: "#fff",
 		linkBorder: "rgba(255, 248, 219, 0.15)",
 		separatorShadow: "rgba(255, 255, 255, 0.5)",
-		subtitle: "#666",
+		subtitle: "#ccc",
 		theme: "#1467ff",
 	},
 };
