@@ -15,6 +15,7 @@ export interface PrismicContext {
 	id: string;
 	locale: string;
 	seo?: {
+		description?: string;
 		title?: string;
 	};
 	translations?: {
@@ -29,6 +30,20 @@ export interface PrismicItem {
 	id?: string;
 	lang?: string;
 	uid?: string;
+}
+
+interface PrismicImageBase {
+	alt?: string;
+	copyright?: string;
+	localFile?: IGatsbyImageData;
+}
+
+export interface PrismicImage extends PrismicImageBase {
+	thumbnails?: {
+		desktopHeader?: PrismicImageBase;
+		mobileCard?: PrismicImageBase;
+		og?: PrismicImageBase;
+	};
 }
 
 export interface PrismicText {
@@ -50,20 +65,26 @@ export interface PrismicPostBodyRichText extends PrismicItem {
 	};
 }
 
+export interface PrismicPage extends PrismicItem {
+	data?: {
+		content?: PrismicText;
+		menuText?: string;
+		seoDescription?: string;
+		seoTitle?: string;
+		socialCard?: PrismicImage;
+		subtitle?: PrismicText;
+		title?: PrismicText;
+	};
+}
+
 export interface PrismicPost extends PrismicItem {
 	data?: {
 		body?: (PrismicPostBodyCodeBlock | PrismicPostBodyRichText)[];
 		excerpt?: string;
-		featuredImage?: {
-			alt?: string;
-			copyright?: string;
-			localFile?: IGatsbyImageData;
-			thumbnails?: {
-				mobileCard?: {
-					localFile?: IGatsbyImageData;
-				};
-			};
-		};
+		featuredImage?: PrismicImage;
+		seoDescription?: string;
+		seoTitle?: string;
+		socialCard?: PrismicImage;
 		subtitle?: PrismicText;
 		title?: PrismicText;
 	};

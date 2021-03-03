@@ -1,11 +1,5 @@
-import {
-	getHtmlTitle,
-	getLanguageCode,
-	getLocale,
-	getSlug,
-} from "./localization.util";
+import { getLanguageCode, getLocale } from "./localization.util";
 import { Context } from "../components/Context";
-import { Helmet } from "react-helmet";
 import { Layout } from "../components/Layout";
 import { Locale } from "../.constants/localization.constants";
 import { PrismicContext } from "../.types/prismic.types";
@@ -37,28 +31,6 @@ export const wrapPageElement = ({
 
 	return (
 		<Context.Provider value={context}>
-			<Helmet>
-				<html lang={lang} />
-				<title>{getHtmlTitle(pageContext, locale)}</title>
-
-				<link
-					href={`https://www.schwigri.com${getSlug(pageContext)}`}
-					rel={"canonical"}
-				/>
-
-				{Object.values(Locale).map(altLocale => {
-					const slug = getSlug(pageContext, altLocale);
-					return (
-						<link
-							href={`https://www.schwigri.com${slug}`}
-							hrefLang={getLanguageCode(altLocale)}
-							key={altLocale}
-							rel={"alternate"}
-						/>
-					);
-				})}
-			</Helmet>
-
 			<Layout>{element}</Layout>
 		</Context.Provider>
 	);
