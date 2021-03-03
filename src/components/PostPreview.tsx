@@ -19,6 +19,11 @@ const PostDate = styled("time")`
 	padding: 0 1.6rem;
 `;
 
+const ThumbnailImage = styled(GatsbyImage)`
+	border-radius: 0.5em 0.5em 0 0;
+	z-index: 0;
+`;
+
 const ThumbnailLink = styled(Link)`
 	border: 0;
 	display: block;
@@ -72,7 +77,10 @@ class PostPreview extends React.Component<Props> {
 				<header>
 					{postImage && (
 						<ThumbnailLink to={slug}>
-							<GatsbyImage alt={featuredImage?.alt || ""} image={postImage} />
+							<ThumbnailImage
+								alt={featuredImage?.alt || ""}
+								image={postImage}
+							/>
 						</ThumbnailLink>
 					)}
 
