@@ -3,9 +3,10 @@ import { Pagination } from "../components/Pagination";
 import { PostPreview } from "../components/PostPreview";
 import { PrismicPost } from "../.types/prismic.types";
 import React from "react";
+import { Seo } from "../components/Seo";
+import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
 import styled from "styled-components";
-import { getTranslation } from "../utils/translation.util";
 
 const PostsGrid = styled("section")`
 	display: grid;
@@ -59,6 +60,11 @@ class BlogTemplate extends React.Component<Props> {
 			<Context.Consumer>
 				{(context): React.ReactElement => (
 					<>
+						<Seo
+							description={getTranslation("blog-description", context.locale)}
+							title={getTranslation("blog", context.locale)}
+						/>
+
 						<PageTitle>
 							{getTranslation("blog", context.locale)}
 							{page > 0 && (

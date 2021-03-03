@@ -92,6 +92,36 @@ exports.createPages = async ({ actions, graphql }) => {
 		});
 	});
 
+	// Posts
+	result.data.posts.edges.forEach(({ node }) => {
+		const { alternateLanguages, firstPublicationDate, id, lang, uid } = node;
+		const langCode = lang.split("-")[0];
+		const prefix = "en" === langCode ? "/" : `/${langCode}/`;
+
+		const translations = {};
+		alternateLanguages.forEach(translation => {
+			const transLangCode = translation.lang.split("-")[0];
+			translations[transLangCode] = translation.uid;
+		});
+
+		const date = new Date(firstPublicationDate);
+		const year = date.getFullYear();
+		const month = date.getMonth() + 1;
+		const path = `${prefix}blog/${year}/${month}/${uid}`;
+
+		createPage({
+			component: require.resolve("./src/templates/post.tsx"),
+			context: {
+				id,
+				locale: lang,
+				translations,
+				type: "post",
+				uid,
+			},
+			path,
+		});
+	});
+
 	const locales = ["en-us", "de-ch", "ja-jp"];
 
 	// Blog pages

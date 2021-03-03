@@ -1,5 +1,6 @@
 export const TRANSLATION_IDS: { [key: string]: string } = {
 	Blog: "blog",
+	BlogDescription: "blog-description",
 	ChangeLanguage: "change-language",
 	CloseMenu: "close-menu",
 	ContinueReading: "continue-reading",
@@ -9,6 +10,7 @@ export const TRANSLATION_IDS: { [key: string]: string } = {
 	English: "en_US",
 	EnglishOnly: "english-only",
 	German: "de_CH",
+	HomeDescription: "home-description",
 	HomeTitle: "home-title",
 	Japanese: "ja_JP",
 	LatestPosts: "latest-posts",
@@ -22,7 +24,7 @@ export const TRANSLATION_IDS: { [key: string]: string } = {
 	PrivacySlug: "privacy-slug",
 	ProfilePhotoAlt: "profile-photo-alt",
 	SeeMorePosts: "see-more-posts",
-	Title: "title",
+	TitleTemplate: "title-template",
 	Untitled: "untitled",
 	Works: "works",
 	WorksSlug: "works-slug",
@@ -30,6 +32,8 @@ export const TRANSLATION_IDS: { [key: string]: string } = {
 
 export const TRANSLATIONS_ENGLISH: { [key: string]: string } = {
 	[TRANSLATION_IDS.Blog]: "Blog",
+	[TRANSLATION_IDS.BlogDescription]:
+		"My latest blog posts on accessibility, internationalization, front-end development, UX design, and language learning.",
 	[TRANSLATION_IDS.ChangeLanguage]: "Change language",
 	[TRANSLATION_IDS.CloseMenu]: "Close menu",
 	[TRANSLATION_IDS.ContinueReading]: "Continue reading",
@@ -39,6 +43,8 @@ export const TRANSLATIONS_ENGLISH: { [key: string]: string } = {
 	[TRANSLATION_IDS.English]: "English",
 	[TRANSLATION_IDS.EnglishOnly]: "English only",
 	[TRANSLATION_IDS.German]: "German",
+	[TRANSLATION_IDS.HomeDescription]:
+		"With a degree in HCDE and professional design and development background, I am passionate about crafting beautiful, usable, and accessible experiences.",
 	[TRANSLATION_IDS.HomeTitle]:
 		"UX designer. Front-end engineer. Language enthusiast.",
 	[TRANSLATION_IDS.Japanese]: "Japanese",
@@ -53,7 +59,7 @@ export const TRANSLATIONS_ENGLISH: { [key: string]: string } = {
 	[TRANSLATION_IDS.PrivacySlug]: "privacy",
 	[TRANSLATION_IDS.ProfilePhotoAlt]: "Me, enjoying the cherry blossoms",
 	[TRANSLATION_IDS.SeeMorePosts]: "See more posts",
-	[TRANSLATION_IDS.Title]: "{title} — Griffen Schwiesow",
+	[TRANSLATION_IDS.TitleTemplate]: `%s — Griffen Schwiesow`,
 	[TRANSLATION_IDS.Untitled]: "Untitled",
 	[TRANSLATION_IDS.Works]: "Works",
 	[TRANSLATION_IDS.WorksSlug]: "works",
@@ -64,6 +70,10 @@ export const TRANSLATIONS_GERMAN: { [key: string]: string } = {
 	[TRANSLATION_IDS.ContinueReading]: "Weiterlesen",
 	[TRANSLATION_IDS.ContinueReadingTitle]: "«{title}» weiterlesen",
 	[TRANSLATION_IDS.German]: "Deutsch",
+	[TRANSLATION_IDS.HomeDescription]:
+		"Mit einem Abschluss in HCDE und Design- und Entwicklungshintergrund bin ich begeistert davon, schöne, nutzbare und zugängliche Erfahrungen zu erstellen.",
+	[TRANSLATION_IDS.HomeTitle]:
+		"UX-Designer. Entwickler. Sprachbegeisterter.",
 	[TRANSLATION_IDS.LatestPosts]: "Neueste Beiträge",
 	[TRANSLATION_IDS.Privacy]: "Datenschutzerklärung",
 	[TRANSLATION_IDS.PrivacySlug]: "datenschutzerklaerung",
@@ -76,6 +86,10 @@ export const TRANSLATIONS_JAPANESE: { [key: string]: string } = {
 	[TRANSLATION_IDS.Blog]: "ブログ",
 	[TRANSLATION_IDS.ContinueReading]: "続きを読む",
 	[TRANSLATION_IDS.ContinueReadingTitle]: "「{title}」の続きを読む",
+	[TRANSLATION_IDS.HomeDescription]:
+		"HCDEを専攻にしてデザイン・デベロップメントの経験を持つプロとして、美しくて使いやすくてアクセシビリティ的に良い経験を作成します。",
+	[TRANSLATION_IDS.HomeTitle]:
+		"UX デザイナー・デベロッパー・語学マニア",
 	[TRANSLATION_IDS.Japanese]: "日本語",
 	[TRANSLATION_IDS.LatestPosts]: "最新の投稿",
 	[TRANSLATION_IDS.Next]: "次",
@@ -83,6 +97,7 @@ export const TRANSLATIONS_JAPANESE: { [key: string]: string } = {
 	[TRANSLATION_IDS.Privacy]: "プライバシー",
 	[TRANSLATION_IDS.PrivacySlug]: "privacy",
 	[TRANSLATION_IDS.SeeMorePosts]: "投稿の一覧へ",
+	[TRANSLATION_IDS.TitleTemplate]: `%s ｜ グリフィン・シュヴィーゾー`,
 	[TRANSLATION_IDS.Works]: "実績",
 	[TRANSLATION_IDS.WorksSlug]: "jisseki",
 };

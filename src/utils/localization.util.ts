@@ -23,18 +23,6 @@ type SlugContext =
 			uid?: string;
 	  };
 
-export const getHtmlTitle = (
-	context?: SlugContext,
-	locale = Locale.en_US
-): string => {
-	const title = context?.seo?.title || getTranslation("home-title", locale);
-
-	switch (context?.type) {
-		default:
-			return getTranslation("title", locale, { title });
-	}
-};
-
 export const getLanguageCode = (lang?: string): LanguageCode => {
 	const code = (lang || "").substr(0, 2);
 

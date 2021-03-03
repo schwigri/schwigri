@@ -1,10 +1,16 @@
 import { Carousel, CarouselItem, CarouselTrack } from "../components/Carousel";
-import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
+import {
+	GatsbyImage,
+	IGatsbyImageData,
+	getImage,
+	getSrc,
+} from "gatsby-plugin-image";
 import { PrismicHomepage, PrismicPost } from "../.types/prismic.types";
 import { Context } from "../components/Context";
 import { PostPreview } from "../components/PostPreview";
 import React from "react";
 import { RichText } from "prismic-reactjs";
+import { Seo } from "../components/Seo";
 import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
 import styled from "styled-components";
@@ -126,20 +132,38 @@ interface Props {
 			}[];
 		};
 		profilePhoto: IGatsbyImageData;
+		socialCard: IGatsbyImageData;
+		socialCardJa: IGatsbyImageData;
 	};
 }
 
 class HomepageTemplate extends React.Component<Props> {
 	render(): React.ReactNode {
 		const posts = this.props.data.posts.edges;
-		const { homepage, profilePhoto } = this.props.data;
+		const {
+			homepage,
+			profilePhoto,
+			socialCard,
+			socialCardJa,
+		} = this.props.data;
 
 		const featuredImage = getImage(profilePhoto);
+		const socialCardUrl = getSrc(socialCard) || "";
+		const socialCardJaUrl = getSrc(socialCardJa) || "";
 
 		return (
 			<Context.Consumer>
 				{(context): React.ReactElement => (
 					<>
+						<Seo
+							description={getTranslation("home-description", context.locale)}
+							image={{
+								alt: getTranslation("social-card-alt", context.locale),
+								url: "ja" === context.lang ? socialCardJaUrl : socialCardUrl,
+							}}
+							title={getTranslation("home-title", context.locale)}
+						/>
+
 						<FeaturedWrapper>
 							{featuredImage && (
 								<FeaturedImageWrapper>
@@ -234,6 +258,16 @@ export const query = graphql`
 		profilePhoto: file(relativePath: { eq: "profile.jpeg" }) {
 			childImageSharp {
 				gatsbyImageData(placeholder: BLURRED, width: 700)
+			}
+		}
+		socialCard: file(relativePath: { eq: "homepage-social-card.png" }) {
+			childImageSharp {
+				gatsbyImageData(height: 600, width: 1200)
+			}
+		}
+		socialCardJa: file(relativePath: { eq: "homepage-social-card-ja.png" }) {
+			childImageSharp {
+				gatsbyImageData(height: 600, width: 1200)
 			}
 		}
 	}

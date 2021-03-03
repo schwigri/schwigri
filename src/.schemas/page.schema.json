@@ -35,5 +35,33 @@
 				"label" : "Content"
 			}
 		}
+	},
+	"SEO": {
+		"seo_title": {
+			"type": "Text",
+			"config": {
+				"label": "Title"
+			}
+		},
+		"seo_description": {
+			"type": "Text",
+			"config": {
+				"label": "Description"
+			}
+		},
+		"social_card": {
+			"type": "Image",
+			"config": {
+				"constraint": {},
+				"thumbnails": [
+					{
+						"name": "og",
+						"width": 1200,
+						"height": 600
+					}
+				],
+				"label": "Social Card"
+			}
+		}
 	}
 }
