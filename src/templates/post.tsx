@@ -1,5 +1,5 @@
 import { Context } from "../components/Context";
-import { PrismicPost } from "../.types/prismic.types";
+import { PrismicPost } from "../types/prismic.types";
 import React from "react";
 import { Seo } from "../components/Seo";
 import { getSrc } from "gatsby-plugin-image";

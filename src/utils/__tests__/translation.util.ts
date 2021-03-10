@@ -2,8 +2,8 @@ import {
 	TRANSLATIONS_ENGLISH,
 	TRANSLATIONS_GERMAN,
 	TRANSLATIONS_JAPANESE,
-} from "../../.constants/translations.constants";
-import { Locale } from "../../.constants/localization.constants";
+} from "../../constants/translations.constants";
+import { Locale } from "../../constants/localization.constants";
 import { getTranslation } from "../translation.util";
 
 describe("getTranslation", () => {

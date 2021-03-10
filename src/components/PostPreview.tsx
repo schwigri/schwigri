@@ -1,7 +1,7 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { formatDate, getLocale, getSlug } from "../utils/localization.util";
 import { Link } from "./Link";
-import { PrismicPost } from "../.types/prismic.types";
+import { PrismicPost } from "../types/prismic.types";
 import React from "react";
 import { RichText } from "prismic-reactjs";
 import { getTranslation } from "../utils/translation.util";

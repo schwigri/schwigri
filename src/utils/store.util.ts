@@ -1,5 +1,5 @@
 import { Store, createStore as reduxCreateStore } from "redux";
-import { StoreAction, StoreActions, StoreState } from "../.types/store.types";
+import { StoreAction, StoreActions, StoreState } from "../types/store.types";
 
 const initialState: StoreState = {
 	menuOpen: false,

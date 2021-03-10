@@ -1,4 +1,4 @@
-import { ButtonVariant } from "../.types/component.types";
+import { ButtonVariant } from "../types/component.types";
 import React from "react";
 import styled from "styled-components";
 

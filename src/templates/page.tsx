@@ -1,5 +1,5 @@
 import { Context } from "../components/Context";
-import { PrismicPage } from "../.types/prismic.types";
+import { PrismicPage } from "../types/prismic.types";
 import React from "react";
 import { RichText } from "prismic-reactjs";
 import { Seo } from "../components/Seo";

@@ -1,5 +1,5 @@
-import { LanguageCode, Locale } from "../.constants/localization.constants";
-import { PrismicContext } from "../.types/prismic.types";
+import { LanguageCode, Locale } from "../constants/localization.constants";
+import { PrismicContext } from "../types/prismic.types";
 import React from "react";
 
 export interface ContextValue {

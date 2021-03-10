@@ -4,8 +4,8 @@ import {
 	JapaneseNumerals,
 	LanguageCode,
 	Locale,
-} from "../.constants/localization.constants";
-import { PageType, PrismicContext } from "../.types/prismic.types";
+} from "../constants/localization.constants";
+import { PageType, PrismicContext } from "../types/prismic.types";
 import { getTranslation } from "./translation.util";
 
 type SlugContext =

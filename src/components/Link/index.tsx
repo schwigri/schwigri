@@ -1,5 +1,5 @@
 import { Link as GatsbyLink, GatsbyLinkProps } from "gatsby";
-import { StoreActions, StoreState } from "../../.types/store.types";
+import { StoreActions, StoreState } from "../../types/store.types";
 import styled, { css } from "styled-components";
 import { ExternalLink } from "./ExternalLink";
 import React from "react";

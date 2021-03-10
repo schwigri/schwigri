@@ -5,7 +5,7 @@ import {
 	getImage,
 	getSrc,
 } from "gatsby-plugin-image";
-import { PrismicHomepage, PrismicPost } from "../.types/prismic.types";
+import { PrismicHomepage, PrismicPost } from "../types/prismic.types";
 import { Context } from "../components/Context";
 import { PostPreview } from "../components/PostPreview";
 import React from "react";
