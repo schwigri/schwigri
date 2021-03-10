@@ -1,30 +1,15 @@
-const {
-	NODE_ENV,
-	URL: NETLIFY_SITE_URL = "https://www.schwigri.com",
-	DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
-	CONTEXT: NETLIFY_ENV = NODE_ENV,
-} = process.env;
-
-const siteUrl =
-	"production" === NETLIFY_ENV ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
-
 const path = require("path");
 require("dotenv").config({
-	path: `.env.${NODE_ENV}`,
+	path: `.env.${process.env.NODE_ENV}`,
 });
-
-const disallowedPolicy = {
-	host: null,
-	policy: [{ disallow: ["/"], userAgent: "*" }],
-	sitemap: null,
-};
 
 module.exports = {
 	siteMetadata: {
-		siteUrl,
+		siteUrl: "https://www.schwigri.com",
 		title: "Griffen Schwiesow",
 	},
 	plugins: [
+		"gatsby-plugin-gatsby-cloud",
 		"gatsby-plugin-image",
 		"gatsby-plugin-sharp",
 		"gatsby-transformer-sharp",
@@ -58,15 +43,16 @@ module.exports = {
 			resolve: "gatsby-plugin-robots-txt",
 			options: {
 				env: {
-					"branch-deploy": { ...disallowedPolicy },
-					"deploy-preview": { ...disallowedPolicy },
-					development: { ...disallowedPolicy },
+					development: {
+						host: null,
+						policy: [{ disallow: ["/"], userAgent: "*" }],
+						sitemap: null,
+					},
 					production: {
 						policy: [{ allow: "/", userAgent: "*" }],
 					},
 				},
 				host: "https://www.schwigri.com",
-				resolveEnv: () => NETLIFY_ENV,
 				sitemap: "https://www.schwigri.com/sitemap.xml",
 			},
 		},
