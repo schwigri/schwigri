@@ -28,6 +28,9 @@ export interface PrismicContext {
 export interface PrismicItem {
 	firstPublicationDate?: string;
 	id?: string;
+	internal?: {
+		type?: string;
+	};
 	lang?: string;
 	uid?: string;
 }
@@ -53,6 +56,9 @@ export interface PrismicText {
 }
 
 export interface PrismicPostBodyCodeBlock extends PrismicItem {
+	internal: {
+		type: "PrismicPostBodyCodeBlock";
+	};
 	primary?: {
 		content?: PrismicText;
 		language?: string;
@@ -60,6 +66,9 @@ export interface PrismicPostBodyCodeBlock extends PrismicItem {
 }
 
 export interface PrismicPostBodyRichText extends PrismicItem {
+	internal: {
+		type: "PrismicPostBodyRichText";
+	};
 	primary?: {
 		content?: PrismicText;
 	};
