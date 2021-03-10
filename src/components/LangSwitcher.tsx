@@ -1,7 +1,7 @@
 import { getLanguageCode, getSlug } from "../utils/localization.util";
 import { Context } from "./Context";
 import { Link } from "./Link";
-import { Locale } from "../.constants/localization.constants";
+import { Locale } from "../constants/localization.constants";
 import React from "react";
 import styled from "styled-components";
 import { getTranslation } from "../utils/translation.util";

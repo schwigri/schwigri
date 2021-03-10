@@ -1,5 +1,5 @@
 import { IGatsbyImageData } from "gatsby-plugin-image";
-import { LanguageCode } from "../.constants/localization.constants";
+import { LanguageCode } from "../constants/localization.constants";
 import { RichTextBlock } from "prismic-reactjs";
 
 export type PageType =

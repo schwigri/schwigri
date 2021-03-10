@@ -1,8 +1,8 @@
 import { getLanguageCode, getLocale } from "./localization.util";
 import { Context } from "../components/Context";
 import { Layout } from "../components/Layout";
-import { Locale } from "../.constants/localization.constants";
-import { PrismicContext } from "../.types/prismic.types";
+import { Locale } from "../constants/localization.constants";
+import { PrismicContext } from "../types/prismic.types";
 import { Provider } from "react-redux";
 import React from "react";
 import { createStore } from "./store.util";

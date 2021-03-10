@@ -2,7 +2,7 @@ import { StaticQuery, graphql } from "gatsby";
 import { getLanguageCode, getSlug } from "../utils/localization.util";
 import { Context } from "./Context";
 import { Helmet } from "react-helmet";
-import { Locale } from "../.constants/localization.constants";
+import { Locale } from "../constants/localization.constants";
 import React from "react";
 import { getTranslation } from "../utils/translation.util";
 

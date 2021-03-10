@@ -1,7 +1,7 @@
 import { Context } from "../components/Context";
 import { Pagination } from "../components/Pagination";
 import { PostPreview } from "../components/PostPreview";
-import { PrismicPost } from "../.types/prismic.types";
+import { PrismicPost } from "../types/prismic.types";
 import React from "react";
 import { Seo } from "../components/Seo";
 import { getTranslation } from "../utils/translation.util";

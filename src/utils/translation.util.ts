@@ -3,8 +3,8 @@ import {
 	TRANSLATIONS_GERMAN,
 	TRANSLATIONS_JAPANESE,
 	TRANSLATION_IDS,
-} from "../.constants/translations.constants";
-import { Locale } from "../.constants/localization.constants";
+} from "../constants/translations.constants";
+import { Locale } from "../constants/localization.constants";
 import { get } from "lodash";
 
 export const getTranslation = (

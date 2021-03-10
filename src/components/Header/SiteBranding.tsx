@@ -1,7 +1,7 @@
 import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
 import { Context } from "../Context";
 import { Link } from "../Link";
-import { Locale } from "../../.constants/localization.constants";
+import { Locale } from "../../constants/localization.constants";
 import React from "react";
 import styled from "styled-components";
 import { getSlug } from "../../utils/localization.util";
