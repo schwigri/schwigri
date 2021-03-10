@@ -60,7 +60,7 @@ module.exports = {
 			resolve: "gatsby-plugin-manifest",
 			options: {
 				background_color: "#ffffff",
-				display: "standalone",
+				display: "browser",
 				icon: path.join(__dirname, "src", "graphics", "icon.png"),
 				icons: [
 					{
