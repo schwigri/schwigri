@@ -2,15 +2,25 @@ import { IGatsbyImageData } from "gatsby-plugin-image";
 import { LanguageCode } from "../constants/localization.constants";
 import { RichTextBlock } from "prismic-reactjs";
 
-export type PageType =
-	| "blog"
-	| "homepage"
-	| "page"
-	| "post"
-	| "privacy"
-	| "works";
+export enum PageType {
+	Blog = "blog",
+	Homepage = "homepage",
+	Page = "page",
+	Post = "post",
+	Privacy = "privacy",
+	Tag = "tag",
+	Works = "works",
+}
+
+export interface Tags {
+	[key: string]: {
+		lang?: string;
+		uid: string;
+	};
+}
 
 export interface PrismicContext {
+	allTags?: Tags;
 	date?: string;
 	id: string;
 	locale: string;
@@ -18,8 +28,12 @@ export interface PrismicContext {
 		description?: string;
 		title?: string;
 	};
+	tag?: string;
 	translations?: {
-		[key in LanguageCode]?: string;
+		[key in LanguageCode]?: {
+			date?: string;
+			uid: string;
+		};
 	};
 	type: PageType;
 	uid?: string;
@@ -32,6 +46,8 @@ export interface PrismicItem {
 		type?: string;
 	};
 	lang?: string;
+	lastPublicationDate?: string;
+	tags?: Array<string>;
 	uid?: string;
 }
 
@@ -51,7 +67,7 @@ export interface PrismicImage extends PrismicImageBase {
 
 export interface PrismicText {
 	html?: string;
-	raw?: RichTextBlock[];
+	raw?: Array<RichTextBlock>;
 	text?: string;
 }
 
@@ -88,7 +104,7 @@ export interface PrismicPage extends PrismicItem {
 
 export interface PrismicPost extends PrismicItem {
 	data?: {
-		body?: (PrismicPostBodyCodeBlock | PrismicPostBodyRichText)[];
+		body?: Array<PrismicPostBodyCodeBlock | PrismicPostBodyRichText>;
 		excerpt?: string;
 		featuredImage?: PrismicImage;
 		seoDescription?: string;

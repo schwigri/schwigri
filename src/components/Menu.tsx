@@ -1,3 +1,4 @@
+import { PageType, PrismicContext } from "../types/prismic.types";
 import { StaticQuery, graphql } from "gatsby";
 import { StoreActions, StoreState } from "../types/store.types";
 import { getLanguageCode, getSlug } from "../utils/localization.util";
@@ -6,8 +7,8 @@ import { Context } from "./Context";
 import { LangSwitcher } from "./LangSwitcher";
 import { Link } from "./Link";
 import { MenuIcon } from "./Icon";
-import { PrismicContext } from "../types/prismic.types";
 import React from "react";
+import { Translation } from "../constants/translations.constants";
 import { connect } from "react-redux";
 import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
@@ -183,7 +184,7 @@ class Menu extends React.Component<Props> {
 					<>
 						<ToggleButton
 							aria-label={getTranslation(
-								!open ? "open-menu" : "close-menu",
+								!open ? Translation.OpenMenu : Translation.CloseMenu,
 								context.locale
 							)}
 							className={"until-md"}
@@ -206,7 +207,7 @@ class Menu extends React.Component<Props> {
 										translations: {
 											[langCode]: node.uid,
 										},
-										type: "page",
+										type: PageType.Page,
 									};
 
 									return (
@@ -218,20 +219,20 @@ class Menu extends React.Component<Props> {
 
 							<MenuLink
 								to={getSlug(
-									{ id: "", locale: "", type: "works" },
+									{ id: "", locale: "", type: PageType.Works },
 									context.locale
 								)}
 							>
-								{getTranslation("works", context.locale)}
+								{getTranslation(Translation.Works, context.locale)}
 							</MenuLink>
 
 							<MenuLink
 								to={getSlug(
-									{ id: "", locale: "", type: "blog" },
+									{ id: "", locale: "", type: PageType.Blog },
 									context.locale
 								)}
 							>
-								{getTranslation("blog", context.locale)}
+								{getTranslation(Translation.Blog, context.locale)}
 							</MenuLink>
 
 							<div className={"until-md"}>

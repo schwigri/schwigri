@@ -1,3 +1,9 @@
+const KuromojiAnalyzer = require("kuroshiro-analyzer-kuromoji");
+const Kuroshiro = require("kuroshiro");
+const slugify = require("slugify");
+
+const kuroshiro = new Kuroshiro();
+
 exports.createPages = async ({ actions, graphql }) => {
 	const { createPage } = actions;
 
@@ -36,28 +42,135 @@ exports.createPages = async ({ actions, graphql }) => {
 				edges {
 					node {
 						alternateLanguages: alternate_languages {
+							document {
+								... on PrismicPost {
+									firstPublicationDate: first_publication_date
+								}
+							}
 							lang
 							uid
 						}
-						firstPublicationDate: first_publication_date
 						id
 						lang
+						lastPublicationDate: last_publication_date
+						firstPublicationDate: first_publication_date
+						tags
 						uid
+					}
+				}
+				tags: group(field: tags) {
+					fieldValue
+					nodes {
+						lang
 					}
 				}
 			}
 		}
 	`);
 
+	await kuroshiro.init(new KuromojiAnalyzer());
+
+	const getLangCode = lang => (lang ? lang.split("-")[0] : "en");
+	const getPrefix = lang => ("en" === lang ? "/" : `/${lang}/`);
+
+	const locales = ["en-us", "de-ch", "ja-jp"];
+	const allTags = {};
+
+	// Collect tags
+	result.data.posts.tags.forEach(({ fieldValue, nodes }) => {
+		allTags[fieldValue] = { lang: getLangCode(nodes[0].lang) };
+	});
+
+	// Posts
+	result.data.posts.edges.forEach(({ node }) => {
+		const { alternateLanguages, id, lang, firstPublicationDate, uid } = node;
+		const langCode = getLangCode(lang);
+		const prefix = getPrefix(langCode);
+
+		const translations = {};
+		alternateLanguages.forEach(translation => {
+			const transLangCode = translation.lang.split("-")[0];
+			translations[transLangCode] = {
+				date: translation.document.firstPublicationDate,
+				uid: translation.uid,
+			};
+		});
+
+		const date = new Date(firstPublicationDate);
+		const year = date.getFullYear();
+		const month = date.getMonth() + 1;
+		const path = `${prefix}blog/${year}/${month}/${uid}`;
+
+		createPage({
+			component: require.resolve("./src/templates/post.tsx"),
+			context: {
+				allTags,
+				date: firstPublicationDate,
+				id,
+				locale: lang,
+				translations,
+				type: "post",
+				uid,
+			},
+			path,
+		});
+	});
+
+	// Tag pages
+	await Promise.all(
+		Object.entries(allTags).map(async ([tag, { lang }]) => {
+			const prefix = getPrefix(lang);
+			const slug =
+				"ja" === lang
+					? await kuroshiro.convert(tag, { to: "romaji" })
+					: slugify(tag, { locale: lang });
+			allTags[tag].uid = slug;
+			const path = `${prefix}blog/tag/${slug}`;
+
+			createPage({
+				component: require.resolve("./src/templates/tag.tsx"),
+				context: {
+					locale: lang,
+					tag,
+					type: "tag",
+					uid: slug,
+				},
+				path,
+			});
+		})
+	);
+
+	// Work pages
+	const workSlugs = {
+		en: "works",
+		de: "portfolio",
+		ja: "jisseki",
+	};
+	locales.forEach(locale => {
+		const langCode = getLangCode(locale);
+		const prefix = getPrefix(langCode);
+		const path = `${prefix}${workSlugs[langCode]}`;
+
+		createPage({
+			component: require.resolve("./src/templates/works.tsx"),
+			context: {
+				locale,
+				type: "works",
+			},
+			path,
+		});
+	});
+
 	// Homepages
 	result.data.homepages.edges.forEach(({ node }) => {
 		const { id, lang } = node;
-		const langCode = lang.split("-")[0];
-		const permalink = "en" === langCode ? "/" : `/${langCode}/`;
+		const langCode = getLangCode(lang);
+		const permalink = getPrefix(langCode);
 
 		createPage({
 			component: require.resolve("./src/templates/homepage.tsx"),
 			context: {
+				allTags,
 				id,
 				locale: lang,
 				type: "homepage",
@@ -69,19 +182,20 @@ exports.createPages = async ({ actions, graphql }) => {
 	// Pages
 	result.data.pages.edges.forEach(({ node }) => {
 		const { alternateLanguages, id, lang, uid } = node;
-		const langCode = lang.split("-")[0];
-		const prefix = "en" === langCode ? "/" : `/${langCode}/`;
+		const langCode = getLangCode(lang);
+		const prefix = getPrefix(langCode);
 		const path = `${prefix}${uid}`;
 
 		const translations = {};
 		alternateLanguages.forEach(translation => {
 			const transLangCode = translation.lang.split("-")[0];
-			translations[transLangCode] = translation.uid;
+			translations[transLangCode] = { uid: translation.uid };
 		});
 
 		createPage({
 			component: require.resolve("./src/templates/page.tsx"),
 			context: {
+				allTags,
 				id,
 				locale: lang,
 				translations,
@@ -91,38 +205,6 @@ exports.createPages = async ({ actions, graphql }) => {
 			path,
 		});
 	});
-
-	// Posts
-	result.data.posts.edges.forEach(({ node }) => {
-		const { alternateLanguages, firstPublicationDate, id, lang, uid } = node;
-		const langCode = lang.split("-")[0];
-		const prefix = "en" === langCode ? "/" : `/${langCode}/`;
-
-		const translations = {};
-		alternateLanguages.forEach(translation => {
-			const transLangCode = translation.lang.split("-")[0];
-			translations[transLangCode] = translation.uid;
-		});
-
-		const date = new Date(firstPublicationDate);
-		const year = date.getFullYear();
-		const month = date.getMonth() + 1;
-		const path = `${prefix}blog/${year}/${month}/${uid}`;
-
-		createPage({
-			component: require.resolve("./src/templates/post.tsx"),
-			context: {
-				id,
-				locale: lang,
-				translations,
-				type: "post",
-				uid,
-			},
-			path,
-		});
-	});
-
-	const locales = ["en-us", "de-ch", "ja-jp"];
 
 	// Blog pages
 	const postsPerPage = 6;
@@ -139,12 +221,13 @@ exports.createPages = async ({ actions, graphql }) => {
 	});
 
 	numPages.forEach(({ locale, pages }) => {
-		const lang = locale.substr(0, 2);
+		const lang = getLangCode(locale);
 		const prefix = "en" === lang ? "/" : `/${lang}/`;
 
 		createPage({
 			component: require.resolve("./src/templates/blog.tsx"),
 			context: {
+				allTags,
 				limit: postsPerPage,
 				locale,
 				page: 0,
@@ -161,6 +244,7 @@ exports.createPages = async ({ actions, graphql }) => {
 			createPage({
 				component: require.resolve("./src/templates/blog.tsx"),
 				context: {
+					allTags,
 					limit: postsPerPage,
 					locale,
 					page: i,

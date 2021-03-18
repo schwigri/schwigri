@@ -4,6 +4,7 @@ import { PostPreview } from "../components/PostPreview";
 import { PrismicPost } from "../types/prismic.types";
 import React from "react";
 import { Seo } from "../components/Seo";
+import { Translation } from "../constants/translations.constants";
 import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
 import styled from "styled-components";
@@ -61,17 +62,20 @@ class BlogTemplate extends React.Component<Props> {
 				{(context): React.ReactElement => (
 					<>
 						<Seo
-							description={getTranslation("blog-description", context.locale)}
-							title={getTranslation("blog", context.locale)}
+							description={getTranslation(
+								Translation.BlogDescription,
+								context.locale
+							)}
+							title={getTranslation(Translation.Blog, context.locale)}
 						/>
 
 						<PageTitle>
-							{getTranslation("blog", context.locale)}
+							{getTranslation(Translation.Blog, context.locale)}
 							{page > 0 && (
 								<span>
 									{" "}
 									(
-									{getTranslation("page-label", context.locale, {
+									{getTranslation(Translation.PageLabel, context.locale, {
 										page: `${page + 1}`,
 									})}
 									)
@@ -125,6 +129,8 @@ export const query = graphql`
 					firstPublicationDate: first_publication_date
 					id
 					lang
+					lastPublicationDate: last_publication_date
+					tags
 					uid
 				}
 			}

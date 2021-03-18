@@ -3,6 +3,7 @@ import { Context } from "./Context";
 import { Link } from "./Link";
 import { Locale } from "../constants/localization.constants";
 import React from "react";
+import { Translation } from "../constants/translations.constants";
 import styled from "styled-components";
 import { getTranslation } from "../utils/translation.util";
 
@@ -38,6 +39,16 @@ class LangSwitcher extends React.Component {
 					<>
 						{Object.values(Locale).map((locale, i) => {
 							const lang = getLanguageCode(locale);
+							let translation = Translation.English;
+							switch (locale) {
+								case "de_CH":
+									translation = Translation.German;
+									break;
+
+								case "ja_JP":
+									translation = Translation.Japanese;
+									break;
+							}
 							return (
 								<React.Fragment key={locale}>
 									<LangLink
@@ -46,7 +57,7 @@ class LangSwitcher extends React.Component {
 										to={getSlug(context.pageContext, locale)}
 										$current={context.lang === lang}
 									>
-										{getTranslation(locale, locale)}
+										{getTranslation(translation, locale)}
 									</LangLink>
 
 									{Object.values(Locale).length - 1 !== i && (

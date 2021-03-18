@@ -1,37 +1,38 @@
 import {
-	TRANSLATIONS_ENGLISH,
-	TRANSLATIONS_GERMAN,
-	TRANSLATIONS_JAPANESE,
+	EnglishTranslations,
+	GermanTranslations,
+	JapaneseTranslations,
+	Translation,
 } from "../../constants/translations.constants";
 import { Locale } from "../../constants/localization.constants";
 import { getTranslation } from "../translation.util";
 
 describe("getTranslation", () => {
 	it("should get a simple translation", () => {
-		expect(getTranslation("blog", Locale.de_CH)).toBe(
-			TRANSLATIONS_GERMAN["blog"]
+		expect(getTranslation(Translation.Blog, Locale.de_CH)).toBe(
+			GermanTranslations[Translation.Blog]
 		);
 
-		expect(getTranslation("blog", Locale.en_US)).toBe(
-			TRANSLATIONS_ENGLISH["blog"]
+		expect(getTranslation(Translation.Blog, Locale.en_US)).toBe(
+			EnglishTranslations[Translation.Blog]
 		);
 
-		expect(getTranslation("blog", Locale.ja_JP)).toBe(
-			TRANSLATIONS_JAPANESE["blog"]
+		expect(getTranslation(Translation.Blog, Locale.ja_JP)).toBe(
+			JapaneseTranslations[Translation.Blog]
 		);
 	});
 
 	it("should default to english", () => {
-		expect(getTranslation("english-only", Locale.de_CH)).toBe(
-			TRANSLATIONS_ENGLISH["english-only"]
+		expect(getTranslation(Translation.EnglishOnly, Locale.de_CH)).toBe(
+			EnglishTranslations[Translation.EnglishOnly]
 		);
 
-		expect(getTranslation("english-only", Locale.en_US)).toBe(
-			TRANSLATIONS_ENGLISH["english-only"]
+		expect(getTranslation(Translation.EnglishOnly, Locale.en_US)).toBe(
+			EnglishTranslations[Translation.EnglishOnly]
 		);
 
-		expect(getTranslation("english-only", Locale.ja_JP)).toBe(
-			TRANSLATIONS_ENGLISH["english-only"]
+		expect(getTranslation(Translation.EnglishOnly, Locale.ja_JP)).toBe(
+			EnglishTranslations[Translation.EnglishOnly]
 		);
 	});
 
@@ -39,23 +40,21 @@ describe("getTranslation", () => {
 		const testData = { title: "Test Title" };
 
 		expect(
-			getTranslation("continue-reading-title", Locale.de_CH, testData)
+			getTranslation(Translation.ContinueReadingTitle, Locale.de_CH, testData)
 		).toBe("«Test Title» weiterlesen");
 
 		expect(
-			getTranslation("continue-reading-title", Locale.en_US, testData)
+			getTranslation(Translation.ContinueReadingTitle, Locale.en_US, testData)
 		).toBe("Continue reading “Test Title”");
 
 		expect(
-			getTranslation("continue-reading-title", Locale.ja_JP, testData)
+			getTranslation(Translation.ContinueReadingTitle, Locale.ja_JP, testData)
 		).toBe("「Test Title」の続きを読む");
 	});
 
 	it("should return an empty string when improper data is passed", () => {
-		expect(getTranslation("continue-reading-title", Locale.de_CH)).toBe("");
-	});
-
-	it("should return an empty string when an unused id is passed", () => {
-		expect(getTranslation("fake-id", Locale.en_US)).toBe("");
+		expect(getTranslation(Translation.ContinueReadingTitle, Locale.de_CH)).toBe(
+			""
+		);
 	});
 });

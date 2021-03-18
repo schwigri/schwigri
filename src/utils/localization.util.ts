@@ -6,7 +6,9 @@ import {
 	Locale,
 } from "../constants/localization.constants";
 import { PageType, PrismicContext } from "../types/prismic.types";
+import { Translation } from "../constants/translations.constants";
 import { getTranslation } from "./translation.util";
+import slugify from "slugify";
 
 type SlugContext =
 	| PrismicContext
@@ -16,8 +18,12 @@ type SlugContext =
 			seo?: {
 				title?: string;
 			};
+			tag?: string;
 			translations?: {
-				[key in LanguageCode]?: string;
+				[key in LanguageCode]?: {
+					date?: string;
+					uid: string;
+				};
 			};
 			type: PageType;
 			uid?: string;
@@ -60,10 +66,10 @@ export const getSlug = (context?: SlugContext, locale?: Locale): string => {
 	const prefix = LanguageCode.en === lang ? "/" : `/${lang}/`;
 
 	switch (context?.type) {
-		case "blog":
+		case PageType.Blog:
 			return `${prefix}blog`;
 
-		case "page":
+		case PageType.Page:
 			if (context?.translations?.[lang]) {
 				return `${prefix}${context.translations[lang]}`;
 			} else if (context?.uid) {
@@ -71,21 +77,39 @@ export const getSlug = (context?: SlugContext, locale?: Locale): string => {
 			}
 			return prefix;
 
-		case "post":
+		case PageType.Post:
 			if (context?.date && context?.uid) {
-				const { uid } = context;
-				const date = new Date(context.date);
+				const uid =
+					locale === context.locale
+						? context.uid
+						: context.translations?.[lang]?.uid;
+				const date = new Date(
+					locale === context.locale
+						? context.date
+						: context.translations?.[lang]?.date || ""
+				);
 				const year = date.getFullYear();
 				const month = date.getMonth() + 1;
 				return `${prefix}blog/${year}/${month}/${uid}`;
 			}
 			return prefix;
 
-		case "privacy":
-			return `${prefix}${getTranslation("privacy-slug", locale)}`;
+		case PageType.Privacy:
+			return `${prefix}${getTranslation(Translation.PrivacySlug, locale)}`;
 
-		case "works":
-			return `${prefix}${getTranslation("works-slug", locale)}`;
+		case PageType.Tag:
+			if (
+				!(context?.locale && locale && context.locale !== locale) &&
+				context?.uid
+			) {
+				const tag = slugify(context.uid, { locale: getLanguageCode(locale) });
+				const slug = getTranslation(Translation.TaggedSlug, locale);
+				return `${prefix}blog/${slug}/${tag}`;
+			}
+			return prefix;
+
+		case PageType.Works:
+			return `${prefix}${getTranslation(Translation.WorksSlug, locale)}`;
 
 		default:
 			return prefix;

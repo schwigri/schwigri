@@ -4,6 +4,7 @@ import { Context } from "./Context";
 import { Helmet } from "react-helmet";
 import { Locale } from "../constants/localization.constants";
 import React from "react";
+import { Translation } from "../constants/translations.constants";
 import { getTranslation } from "../utils/translation.util";
 
 interface BaseProps {
@@ -70,7 +71,10 @@ class Seo extends React.Component<Props> {
 								: [{ content: "summary", name: "twitter:card" }]
 						)}
 						title={title}
-						titleTemplate={getTranslation("title-template", context.locale)}
+						titleTemplate={getTranslation(
+							Translation.TitleTemplate,
+							context.locale
+						)}
 					>
 						<link
 							href={`${siteUrl}${getSlug(context.pageContext)}`}

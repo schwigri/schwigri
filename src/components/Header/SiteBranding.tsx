@@ -2,10 +2,12 @@ import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
 import { Context } from "../Context";
 import { Link } from "../Link";
 import { Locale } from "../../constants/localization.constants";
+import { PageType } from "../../types/prismic.types";
 import React from "react";
-import styled from "styled-components";
+import { Translation } from "../../constants/translations.constants";
 import { getSlug } from "../../utils/localization.util";
 import { getTranslation } from "../../utils/translation.util";
+import styled from "styled-components";
 
 const Title = styled("span")`
 	font-family: ${({ theme }): string => theme.fonts.heading};
@@ -48,11 +50,13 @@ class SiteBranding extends React.Component<Props> {
 		return (
 			<Context.Consumer>
 				{(context): React.ReactElement => (
-					<Wrapper to={getSlug({ locale: context.locale, type: "homepage" })}>
+					<Wrapper
+						to={getSlug({ locale: context.locale, type: PageType.Homepage })}
+					>
 						{logo && (
 							<Logo>
 								<GatsbyImage
-									alt={getTranslation("logo-alt", context.locale)}
+									alt={getTranslation(Translation.LogoAlt, context.locale)}
 									image={logo}
 									loading={"eager"}
 								/>

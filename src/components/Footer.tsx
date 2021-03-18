@@ -1,8 +1,11 @@
 import { ExternalLink, Link } from "./Link";
 import { Context } from "./Context";
+import { PageType } from "../types/prismic.types";
 import React from "react";
+import { Translation } from "../constants/translations.constants";
 import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
+import { getSlug } from "../utils/localization.util";
 
 const RepoText = styled("abbr")`
 	&::after {
@@ -71,11 +74,13 @@ class Footer extends React.Component {
 					<Wrapper>
 						<Content>
 							<Side>
-								<Item>{getTranslation("copyright", context.locale)}</Item>
+								<Item>{getTranslation(Translation.Copyright, context.locale)}</Item>
 
 								<Item>
-									<Link to={getTranslation("privacy-slug", context.locale)}>
-										{getTranslation("privacy", context.locale)}
+									<Link
+										to={getSlug({ type: PageType.Privacy }, context.locale)}
+									>
+										{getTranslation(Translation.Privacy, context.locale)}
 									</Link>
 								</Item>
 
@@ -83,7 +88,7 @@ class Footer extends React.Component {
 									<ExternalLink href={"https://github.com/schwigri/schwigri"}>
 										<RepoText
 											title={getTranslation(
-												"made-with-love-peace-react",
+												Translation.MadeWithLovePeaceReact,
 												context.locale
 											)}
 										>
