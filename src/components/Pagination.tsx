@@ -1,6 +1,7 @@
 import { Context, ContextValue } from "./Context";
 import { Link } from "./Link";
 import React from "react";
+import { Translation } from "../constants/translations.constants";
 import { getSlug } from "../utils/localization.util";
 import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
@@ -24,16 +25,18 @@ class Pagination extends React.Component<Props> {
 		const { currentPage, numPages } = this.props;
 
 		const getLinks = ({
-			pageContext,
-			locale,
-		}: ContextValue): React.ReactNode => {
+			                  pageContext,
+			                  locale,
+		                  }: ContextValue): React.ReactNode => {
 			const links = [];
 			for (let i = 0; i < numPages; i++) {
 				const prefix = getSlug(pageContext, locale);
 				const target = 0 === i ? prefix : `${prefix}/${i + 1}`;
 				const pageNum = `${i + 1}`;
 				const label = getTranslation(
-					i === currentPage ? "current-page-label" : "page-label",
+					i === currentPage
+						? Translation.CurrentPageLabel
+						: Translation.PageLabel,
 					locale,
 					{ page: pageNum }
 				);
@@ -67,7 +70,7 @@ class Pagination extends React.Component<Props> {
 					<Wrapper>
 						{currentPage > 0 && (
 							<PageLink to={getPreviousLink(context)}>
-								{getTranslation("previous", context.locale)}
+								{getTranslation(Translation.Previous, context.locale)}
 							</PageLink>
 						)}
 
@@ -75,7 +78,7 @@ class Pagination extends React.Component<Props> {
 
 						{currentPage < numPages - 1 && (
 							<PageLink to={getNextLink(context)}>
-								{getTranslation("next", context.locale)}
+								{getTranslation(Translation.Next, context.locale)}
 							</PageLink>
 						)}
 					</Wrapper>

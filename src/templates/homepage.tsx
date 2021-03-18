@@ -11,6 +11,7 @@ import { PostPreview } from "../components/PostPreview";
 import React from "react";
 import { RichText } from "prismic-reactjs";
 import { Seo } from "../components/Seo";
+import { Translation } from "../constants/translations.constants";
 import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
 import styled from "styled-components";
@@ -34,7 +35,7 @@ const FeaturedContent = styled("div")`
 const FeaturedImage = styled(GatsbyImage)`
 	border-radius: 0.5em;
 	box-shadow: ${({ theme }): string =>
-		`0 0 1px ${theme.colors.separatorShadow}`};
+	`0 0 1px ${theme.colors.separatorShadow}`};
 	overflow: hidden;
 	width: 100%;
 	z-index: 0;
@@ -157,19 +158,25 @@ class HomepageTemplate extends React.Component<Props> {
 				{(context): React.ReactElement => (
 					<>
 						<Seo
-							description={getTranslation("home-description", context.locale)}
+							description={getTranslation(
+								Translation.HomeDescription,
+								context.locale
+							)}
 							image={{
-								alt: getTranslation("social-card-alt", context.locale),
+								alt: getTranslation(Translation.SocialCardAlt, context.locale),
 								url: "ja" === context.lang ? socialCardJaUrl : socialCardUrl,
 							}}
-							title={getTranslation("home-title", context.locale)}
+							title={getTranslation(Translation.HomeTitle, context.locale)}
 						/>
 
 						<FeaturedWrapper>
 							{featuredImage && (
 								<FeaturedImageWrapper>
 									<FeaturedImage
-										alt={getTranslation("profile-photo-alt", context.locale)}
+										alt={getTranslation(
+											Translation.ProfilePhotoAlt,
+											context.locale
+										)}
 										image={featuredImage}
 										loading={"eager"}
 									/>
@@ -190,7 +197,9 @@ class HomepageTemplate extends React.Component<Props> {
 
 						{posts.length && (
 							<LatestPostsSection>
-								<h2>{getTranslation("latest-posts", context.locale)}</h2>
+								<h2>
+									{getTranslation(Translation.LatestPosts, context.locale)}
+								</h2>
 								<LatestPosts>
 									{posts.map(
 										({ node }): React.ReactElement => (
@@ -226,7 +235,7 @@ export const query = graphql`
 		posts: allPrismicPost(
 			limit: 3
 			filter: { lang: { eq: $locale } }
-			sort: { order: DESC, fields: first_publication_date }
+			sort: { order: DESC, fields: last_publication_date }
 		) {
 			edges {
 				node {
@@ -252,6 +261,8 @@ export const query = graphql`
 					firstPublicationDate: first_publication_date
 					id
 					lang
+					lastPublicationDate: last_publication_date
+					tags
 					uid
 				}
 			}

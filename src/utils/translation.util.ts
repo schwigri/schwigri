@@ -1,35 +1,32 @@
 import {
-	TRANSLATIONS_ENGLISH,
-	TRANSLATIONS_GERMAN,
-	TRANSLATIONS_JAPANESE,
-	TRANSLATION_IDS,
+	EnglishTranslations,
+	GermanTranslations,
+	JapaneseTranslations,
+	Translation,
 } from "../constants/translations.constants";
 import { Locale } from "../constants/localization.constants";
 import { get } from "lodash";
 
 export const getTranslation = (
-	id: string,
+	id: Translation,
 	locale: Locale = Locale.en_US,
 	data?: { [key: string]: string }
 ): string => {
-	const translationId = TRANSLATION_IDS[id] || id;
-
 	let translationSet;
 	switch (locale) {
 		case "de_CH":
-			translationSet = TRANSLATIONS_GERMAN;
+			translationSet = GermanTranslations;
 			break;
 
 		case "ja_JP":
-			translationSet = TRANSLATIONS_JAPANESE;
+			translationSet = JapaneseTranslations;
 			break;
 
 		default:
-			translationSet = TRANSLATIONS_ENGLISH;
+			translationSet = EnglishTranslations;
 	}
 
-	const translatedString =
-		translationSet[translationId] || TRANSLATIONS_ENGLISH[translationId];
+	const translatedString = translationSet[id] || EnglishTranslations[id];
 	if (!translatedString) return "";
 
 	return insertDynamicValues(translatedString, data);

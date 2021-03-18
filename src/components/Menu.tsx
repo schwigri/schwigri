@@ -1,3 +1,4 @@
+import { PageType, PrismicContext } from "../types/prismic.types";
 import { StaticQuery, graphql } from "gatsby";
 import { StoreActions, StoreState } from "../types/store.types";
 import { getLanguageCode, getSlug } from "../utils/localization.util";
@@ -6,8 +7,8 @@ import { Context } from "./Context";
 import { LangSwitcher } from "./LangSwitcher";
 import { Link } from "./Link";
 import { MenuIcon } from "./Icon";
-import { PrismicContext } from "../types/prismic.types";
 import React from "react";
+import { Translation } from "../constants/translations.constants";
 import { connect } from "react-redux";
 import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
@@ -71,7 +72,7 @@ const MenuLink = styled(Link)`
 
 		&::after {
 			@media (min-width: ${({ theme }): string =>
-					`${theme.breakpoints.md}px`}) {
+	`${theme.breakpoints.md}px`}) {
 				opacity: 1;
 				transform: translate3d(1.25em, 0, 0);
 			}
@@ -87,7 +88,7 @@ const Wrapper = styled("nav")<WrapperProps>`
 	background-color: ${({ theme }): string => theme.colors.background};
 	box-shadow: 0 0 1px
 		${({ $open, theme }): string =>
-			$open ? theme.colors.separatorShadow : "rgba(0, 0, 0, 0)"};
+	$open ? theme.colors.separatorShadow : "rgba(0, 0, 0, 0)"};
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -97,7 +98,7 @@ const Wrapper = styled("nav")<WrapperProps>`
 	position: absolute;
 	top: 100%;
 	transform: ${({ $open }): string =>
-		$open ? "translate3d(0, 0, 0)" : "translate3d(0, calc(-100% - 72px), 0)"};
+	$open ? "translate3d(0, 0, 0)" : "translate3d(0, calc(-100% - 72px), 0)"};
 	transition: opacity 0s, transform 0.3s, visibility 0.3s;
 	visibility: ${({ $open }): string => ($open ? "visible" : "hidden")};
 	width: 100%;
@@ -149,7 +150,7 @@ const ToggleButton = styled(Button)<ButtonProps>`
 
 	svg {
 		transform: ${({ $open }): string =>
-			$open ? "rotate(-90deg)" : "rotate(0deg)"};
+	$open ? "rotate(-90deg)" : "rotate(0deg)"};
 		transition: transform 0.3s;
 	}
 `;
@@ -183,7 +184,7 @@ class Menu extends React.Component<Props> {
 					<>
 						<ToggleButton
 							aria-label={getTranslation(
-								!open ? "open-menu" : "close-menu",
+								!open ? Translation.OpenMenu : Translation.CloseMenu,
 								context.locale
 							)}
 							className={"until-md"}
@@ -206,7 +207,7 @@ class Menu extends React.Component<Props> {
 										translations: {
 											[langCode]: node.uid,
 										},
-										type: "page",
+										type: PageType.Page,
 									};
 
 									return (
@@ -218,20 +219,20 @@ class Menu extends React.Component<Props> {
 
 							<MenuLink
 								to={getSlug(
-									{ id: "", locale: "", type: "works" },
+									{ id: "", locale: "", type: PageType.Works },
 									context.locale
 								)}
 							>
-								{getTranslation("works", context.locale)}
+								{getTranslation(Translation.Works, context.locale)}
 							</MenuLink>
 
 							<MenuLink
 								to={getSlug(
-									{ id: "", locale: "", type: "blog" },
+									{ id: "", locale: "", type: PageType.Blog },
 									context.locale
 								)}
 							>
-								{getTranslation("blog", context.locale)}
+								{getTranslation(Translation.Blog, context.locale)}
 							</MenuLink>
 
 							<div className={"until-md"}>
