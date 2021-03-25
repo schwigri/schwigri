@@ -28,7 +28,7 @@ export interface PrismicContext {
 		description?: string;
 		title?: string;
 	};
-	site: {
+	site?: {
 		siteMetadata: {
 			siteUrl: string;
 		};
@@ -107,9 +107,13 @@ export interface PrismicPage extends PrismicItem {
 	};
 }
 
+export type PrismicPostBodyBlock =
+	| PrismicPostBodyCodeBlock
+	| PrismicPostBodyRichText;
+
 export interface PrismicPost extends PrismicItem {
 	data?: {
-		body?: Array<PrismicPostBodyCodeBlock | PrismicPostBodyRichText>;
+		body?: Array<PrismicPostBodyBlock>;
 		excerpt?: string;
 		featuredImage?: PrismicImage;
 		seoDescription?: string;

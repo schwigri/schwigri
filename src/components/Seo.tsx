@@ -1,10 +1,10 @@
 import { StaticQuery, graphql } from "gatsby";
 import { getLanguageCode, getSlug } from "../utils/localization.util";
-import { Context } from "./Context";
+import { SiteContext } from "../context/site.context";
 import { Helmet } from "react-helmet";
 import { Locale } from "../constants/localization.constants";
 import React from "react";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
 import { getTranslation } from "../utils/translation.util";
 
 interface BaseProps {
@@ -32,7 +32,7 @@ class Seo extends React.Component<Props> {
 		const { siteUrl } = data.site.siteMetadata;
 
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{(context): React.ReactElement => (
 					<Helmet
 						htmlAttributes={{ lang: context.lang }}
@@ -94,7 +94,7 @@ class Seo extends React.Component<Props> {
 						})}
 					</Helmet>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

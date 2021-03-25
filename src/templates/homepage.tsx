@@ -6,12 +6,12 @@ import {
 	getSrc,
 } from "gatsby-plugin-image";
 import { PrismicHomepage, PrismicPost } from "../types/prismic.types";
-import { Context } from "../components/Context";
+import { SiteContext } from "../context/site.context";
 import { PostPreview } from "../components/PostPreview";
 import React from "react";
 import { RichText } from "prismic-reactjs";
 import { Seo } from "../components/Seo";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
 import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
 import styled from "styled-components";
@@ -156,7 +156,7 @@ class HomepageTemplate extends React.Component<Props> {
 		console.log(this.props.data);
 
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{(context): React.ReactElement => (
 					<>
 						<Seo
@@ -215,7 +215,7 @@ class HomepageTemplate extends React.Component<Props> {
 						)}
 					</>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

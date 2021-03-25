@@ -1,7 +1,7 @@
-import { Context, ContextValue } from "./Context";
+import { SiteContext, ContextValue } from "../context/site.context";
 import { Link } from "./Link";
 import React from "react";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
 import { getSlug } from "../utils/localization.util";
 import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
@@ -65,7 +65,7 @@ class Pagination extends React.Component<Props> {
 		};
 
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{(context): React.ReactElement => (
 					<Wrapper>
 						{currentPage > 0 && (
@@ -83,7 +83,7 @@ class Pagination extends React.Component<Props> {
 						)}
 					</Wrapper>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

@@ -1,12 +1,11 @@
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { PageType, PrismicPost } from "../types/prismic.types";
-import { formatDate, getSlug } from "../utils/localization.util";
-import { Context } from "../components/Context";
-import { Link } from "../components/Link";
+import { SiteContext } from "../context/site.context";
+import { PostContent } from "../components/PostContent";
+import { PostHeader } from "../components/PostHeader";
+import { PrismicPost } from "../types/prismic.types";
 import React from "react";
-import { RichText } from "prismic-reactjs";
 import { Seo } from "../components/Seo";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
+import { getImage } from "gatsby-plugin-image";
 import { getSrc } from "gatsby-plugin-image";
 import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
@@ -17,48 +16,6 @@ const Separator = styled("hr")`
 	border-top-width: 0;
 	margin: 4em auto;
 	width: 80%;
-`;
-
-const TagLink = styled(Link)`
-	&::before {
-		content: "#";
-	}
-`;
-
-const Tag = styled("li")`
-	display: inline-block;
-	margin-right: 0.5em;
-`;
-
-const Tags = styled("ul")`
-	list-style: none;
-	padding: 0 1.6rem;
-
-	@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
-		padding: 0 3.2rem;
-	}
-`;
-
-const Meta = styled("div")`
-	color: ${({ theme }): string => theme.colors.subtitle};
-	font-size: 0.9em;
-	margin: 0 auto 1em;
-	text-align: left;
-`;
-
-const Content = styled("div")`
-	margin: 4em auto;
-`;
-
-const Subtitle = styled("div")`
-	color: ${({ theme }): string => theme.colors.subtitle};
-	font-family: ${({ theme }): string => theme.fonts.heading};
-	font-size: 1.2em;
-`;
-
-const Header = styled("div")`
-	margin: 4em 0;
-	text-align: center;
 `;
 
 interface Props {
@@ -79,19 +36,13 @@ class PostTemplate extends React.Component<Props> {
 			post.data?.featuredImage?.thumbnails?.desktopHeader?.localFile &&
 			getImage(post.data.featuredImage.thumbnails.desktopHeader.localFile);
 
-		const hasTags = post.tags ? post.tags.length > 0 : false;
-
 		const firstDate = new Date(post.firstPublicationDate || "");
 		const lastDate = new Date(post.lastPublicationDate || "");
-		const sameDate =
-			firstDate.getFullYear() === lastDate.getFullYear() &&
-			firstDate.getMonth() === lastDate.getMonth() &&
-			firstDate.getDate() === lastDate.getDate();
 
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{(context): React.ReactElement => (
-					<>
+					<article>
 						<Seo
 							description={post.data?.seoDescription || ""}
 							image={
@@ -112,81 +63,25 @@ class PostTemplate extends React.Component<Props> {
 							}
 						/>
 
-						{featuredImage && (
-							<GatsbyImage
-								alt={post?.data?.featuredImage?.alt || ""}
-								image={featuredImage}
+						{post.data?.title && (
+							<PostHeader
+								featuredImage={{
+									alt: post.data.featuredImage?.alt || "",
+									image: featuredImage,
+								}}
+								publishedOn={firstDate}
+								tags={post.tags}
+								title={post.data.title}
+								updatedOn={lastDate}
 							/>
 						)}
 
-						<Header>
-							<RichText render={post.data?.title?.raw} />
+						<Separator />
 
-							{post.data?.subtitle?.raw && (
-								<Subtitle>
-									<RichText render={post.data.subtitle.raw} />
-								</Subtitle>
-							)}
-
-							<Meta>
-								<p>
-									{getTranslation(Translation.PublishedOn, context.locale, {
-										date: formatDate(firstDate, context.locale),
-									})}
-									{!sameDate && (
-										<>
-											<br />
-											{getTranslation(Translation.UpdatedOn, context.locale, {
-												date: formatDate(lastDate, context.locale),
-											})}
-										</>
-									)}
-								</p>
-
-								{hasTags && (
-									<Tags
-										aria-label={getTranslation(
-											Translation.Tags,
-											context.locale
-										)}
-										role={"list"}
-									>
-										{post.tags
-											?.filter(tag => !!context.pageContext?.allTags?.[tag])
-											.map(tag => (
-												<Tag key={tag}>
-													<TagLink
-														to={getSlug(
-															{
-																type: PageType.Tag,
-																uid: context.pageContext?.allTags?.[tag].uid,
-															},
-															context.locale
-														)}
-													>
-														{tag}
-													</TagLink>
-												</Tag>
-											))}
-									</Tags>
-								)}
-							</Meta>
-						</Header>
-
-						<Content>
-							<Separator />
-
-							{post.data?.body?.map(block => (
-								<section key={block.id}>
-									{"PrismicPostBodyRichText" === block.internal.type && (
-										<RichText render={block.primary?.content?.raw} />
-									)}
-								</section>
-							))}
-						</Content>
-					</>
+						<PostContent content={post.data?.body} />
+					</article>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

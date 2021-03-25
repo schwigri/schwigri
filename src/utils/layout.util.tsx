@@ -1,5 +1,5 @@
 import { getLanguageCode, getLocale } from "./localization.util";
-import { Context } from "../components/Context";
+import { SiteContext } from "../context/site.context";
 import { Layout } from "../components/Layout";
 import { Locale } from "../constants/localization.constants";
 import { PrismicContext } from "../types/prismic.types";
@@ -30,9 +30,9 @@ export const wrapPageElement = ({
 	};
 
 	return (
-		<Context.Provider value={context}>
+		<SiteContext.Provider value={context}>
 			<Layout>{element}</Layout>
-		</Context.Provider>
+		</SiteContext.Provider>
 	);
 };
 

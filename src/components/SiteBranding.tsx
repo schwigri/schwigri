@@ -1,12 +1,12 @@
 import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
-import { Context } from "../Context";
-import { Link } from "../Link";
-import { Locale } from "../../constants/localization.constants";
-import { PageType } from "../../types/prismic.types";
+import { SiteContext } from "../context/site.context";
+import { Link } from "./Link";
+import { Locale } from "../constants/localization.constants";
+import { PageType } from "../types/prismic.types";
 import React from "react";
-import { Translation } from "../../constants/translations.constants";
-import { getSlug } from "../../utils/localization.util";
-import { getTranslation } from "../../utils/translation.util";
+import { Translation } from "../constants/translation.constants";
+import { getSlug } from "../utils/localization.util";
+import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
 
 const Title = styled("span")`
@@ -48,7 +48,7 @@ class SiteBranding extends React.Component<Props> {
 		const logo = getImage(this.props.logo);
 
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{(context): React.ReactElement => (
 					<Wrapper
 						to={getSlug({ locale: context.locale, type: PageType.Homepage })}
@@ -78,7 +78,7 @@ class SiteBranding extends React.Component<Props> {
 						</Title>
 					</Wrapper>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

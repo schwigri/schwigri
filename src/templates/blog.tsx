@@ -1,10 +1,10 @@
-import { Context } from "../components/Context";
+import { SiteContext } from "../context/site.context";
 import { Pagination } from "../components/Pagination";
 import { PostPreview } from "../components/PostPreview";
 import { PrismicPost } from "../types/prismic.types";
 import React from "react";
 import { Seo } from "../components/Seo";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
 import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
 import styled from "styled-components";
@@ -58,7 +58,7 @@ class BlogTemplate extends React.Component<Props> {
 		);
 
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{(context): React.ReactElement => (
 					<>
 						<Seo
@@ -94,7 +94,7 @@ class BlogTemplate extends React.Component<Props> {
 						{pages > 1 && <Pagination currentPage={page} numPages={pages} />}
 					</>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

@@ -1,27 +1,10 @@
-import { Context } from "../components/Context";
+import { PageContent } from "../components/PageContent";
+import { PageHeader } from "../components/PageHeader";
 import { PrismicPage } from "../types/prismic.types";
 import React from "react";
-import { RichText } from "prismic-reactjs";
 import { Seo } from "../components/Seo";
 import { getSrc } from "gatsby-plugin-image";
 import { graphql } from "gatsby";
-import styled from "styled-components";
-
-const Content = styled("div")`
-	margin: 4em auto;
-	max-width: ${({ theme }): string => theme.sizes.copy};
-`;
-
-const Meta = styled("div")`
-	color: ${({ theme }): string => theme.colors.subtitle};
-	font-family: ${({ theme }): string => theme.fonts.heading};
-	font-size: 1.2em;
-`;
-
-const Header = styled("div")`
-	margin: 4em 0;
-	text-align: center;
-`;
 
 interface Props {
 	data: {
@@ -38,41 +21,29 @@ class PageTemplate extends React.Component<Props> {
 			: undefined;
 
 		return (
-			<Context.Consumer>
-				{(context): React.ReactElement => (
-					<>
-						<Seo
-							description={page.data?.seoDescription || ""}
-							image={
-								socialCardUrl
-									? {
-											alt:
-												page.data?.socialCard?.thumbnails?.og?.alt ||
-												page.data?.socialCard?.alt ||
-												"",
-											url: socialCardUrl,
-									  }
-									: undefined
-							}
-							title={page.data?.seoTitle || ""}
-						/>
+			<>
+				<Seo
+					description={page.data?.seoDescription || ""}
+					image={
+						socialCardUrl
+							? {
+									alt:
+										page.data?.socialCard?.thumbnails?.og?.alt ||
+										page.data?.socialCard?.alt ||
+										"",
+									url: socialCardUrl,
+							  }
+							: undefined
+					}
+					title={page.data?.seoTitle || ""}
+				/>
 
-						<Header>
-							<RichText render={page.data?.title?.raw} />
-
-							{page.data?.subtitle?.raw && (
-								<Meta>
-									<RichText render={page.data.subtitle.raw} />
-								</Meta>
-							)}
-						</Header>
-
-						<Content>
-							<RichText render={page.data?.content?.raw} />
-						</Content>
-					</>
+				{page.data?.title && (
+					<PageHeader subtitle={page.data.subtitle} title={page.data.title} />
 				)}
-			</Context.Consumer>
+
+				<PageContent content={page.data?.content} />
+			</>
 		);
 	}
 }

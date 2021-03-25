@@ -1,8 +1,8 @@
 import { ExternalLink, Link } from "./Link";
-import { Context } from "./Context";
+import { SiteContext } from "../context/site.context";
 import { PageType } from "../types/prismic.types";
 import React from "react";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
 import { getSlug } from "../utils/localization.util";
 import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
@@ -69,7 +69,7 @@ const Wrapper = styled("footer")`
 class Footer extends React.Component {
 	render(): React.ReactNode {
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{(context): React.ReactElement => (
 					<Wrapper>
 						<Content>
@@ -102,7 +102,7 @@ class Footer extends React.Component {
 						</Content>
 					</Wrapper>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

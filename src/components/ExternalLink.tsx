@@ -1,4 +1,4 @@
-import { LinkStyles } from "./";
+import { LinkStyles } from "./Link";
 import React from "react";
 import styled from "styled-components";
 

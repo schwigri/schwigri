@@ -3,12 +3,12 @@ import { StaticQuery, graphql } from "gatsby";
 import { StoreActions, StoreState } from "../types/store.types";
 import { getLanguageCode, getSlug } from "../utils/localization.util";
 import { Button } from "./Button";
-import { Context } from "./Context";
+import { SiteContext } from "../context/site.context";
 import { LangSwitcher } from "./LangSwitcher";
 import { Link } from "./Link";
 import { MenuIcon } from "./Icon";
 import React from "react";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
 import { connect } from "react-redux";
 import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
@@ -26,6 +26,7 @@ const MenuLink = styled(Link)`
 	@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
 		margin-bottom: 0;
 		margin-left: 3em;
+
 		&:first-child {
 			margin-left: 0;
 		}
@@ -72,7 +73,7 @@ const MenuLink = styled(Link)`
 
 		&::after {
 			@media (min-width: ${({ theme }): string =>
-	`${theme.breakpoints.md}px`}) {
+					`${theme.breakpoints.md}px`}) {
 				opacity: 1;
 				transform: translate3d(1.25em, 0, 0);
 			}
@@ -88,7 +89,7 @@ const Wrapper = styled("nav")<WrapperProps>`
 	background-color: ${({ theme }): string => theme.colors.background};
 	box-shadow: 0 0 1px
 		${({ $open, theme }): string =>
-	$open ? theme.colors.separatorShadow : "rgba(0, 0, 0, 0)"};
+			$open ? theme.colors.separatorShadow : "rgba(0, 0, 0, 0)"};
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -98,7 +99,7 @@ const Wrapper = styled("nav")<WrapperProps>`
 	position: absolute;
 	top: 100%;
 	transform: ${({ $open }): string =>
-	$open ? "translate3d(0, 0, 0)" : "translate3d(0, calc(-100% - 72px), 0)"};
+		$open ? "translate3d(0, 0, 0)" : "translate3d(0, calc(-100% - 72px), 0)"};
 	transition: opacity 0s, transform 0.3s, visibility 0.3s;
 	visibility: ${({ $open }): string => ($open ? "visible" : "hidden")};
 	width: 100%;
@@ -150,7 +151,7 @@ const ToggleButton = styled(Button)<ButtonProps>`
 
 	svg {
 		transform: ${({ $open }): string =>
-	$open ? "rotate(-90deg)" : "rotate(0deg)"};
+			$open ? "rotate(-90deg)" : "rotate(0deg)"};
 		transition: transform 0.3s;
 	}
 `;
@@ -179,7 +180,7 @@ class Menu extends React.Component<Props> {
 		const { data, open, toggleMenu } = this.props;
 
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{(context): React.ReactElement => (
 					<>
 						<ToggleButton
@@ -205,7 +206,9 @@ class Menu extends React.Component<Props> {
 										id: node.id,
 										locale: node.lang,
 										translations: {
-											[langCode]: node.uid,
+											[langCode]: {
+												uid: node.uid,
+											},
 										},
 										type: PageType.Page,
 									};
@@ -241,7 +244,7 @@ class Menu extends React.Component<Props> {
 						</Wrapper>
 					</>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

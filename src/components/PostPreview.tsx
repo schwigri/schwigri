@@ -1,11 +1,11 @@
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { PageType, PrismicPost } from "../types/prismic.types";
 import { formatDate, getLocale, getSlug } from "../utils/localization.util";
-import { Context } from "./Context";
+import { SiteContext } from "../context/site.context";
 import { Link } from "./Link";
 import React from "react";
 import { RichText } from "prismic-reactjs";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
 import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
 
@@ -95,7 +95,7 @@ class PostPreview extends React.Component<Props> {
 			getImage(featuredImage.thumbnails?.mobileCard?.localFile);
 
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{context => (
 					<Wrapper className={className}>
 						<header>
@@ -160,7 +160,7 @@ class PostPreview extends React.Component<Props> {
 						</p>
 					</Wrapper>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

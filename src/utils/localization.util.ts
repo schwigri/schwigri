@@ -6,7 +6,7 @@ import {
 	Locale,
 } from "../constants/localization.constants";
 import { PageType, PrismicContext } from "../types/prismic.types";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
 import { getTranslation } from "./translation.util";
 import slugify from "slugify";
 
@@ -70,8 +70,8 @@ export const getSlug = (context?: SlugContext, locale?: Locale): string => {
 			return `${prefix}blog`;
 
 		case PageType.Page:
-			if (context?.translations?.[lang]) {
-				return `${prefix}${context.translations[lang]}`;
+			if (context?.translations?.[lang]?.uid) {
+				return `${prefix}${context.translations[lang]?.uid}`;
 			} else if (context?.uid) {
 				return `${prefix}${context.uid}`;
 			}

@@ -1,9 +1,9 @@
 import { getLanguageCode, getSlug } from "../utils/localization.util";
-import { Context } from "./Context";
+import { SiteContext } from "../context/site.context";
 import { Link } from "./Link";
 import { Locale } from "../constants/localization.constants";
 import React from "react";
-import { Translation } from "../constants/translations.constants";
+import { Translation } from "../constants/translation.constants";
 import styled from "styled-components";
 import { getTranslation } from "../utils/translation.util";
 
@@ -27,14 +27,14 @@ const LangLink = styled("span")<LangLinkProps>`
 	&:hover {
 		background-color: inherit;
 		text-decoration: ${({ $current }): string =>
-	$current ? "none" : "underline"};
+			$current ? "none" : "underline"};
 	}
 `;
 
 class LangSwitcher extends React.Component {
 	render(): React.ReactNode {
 		return (
-			<Context.Consumer>
+			<SiteContext.Consumer>
 				{context => (
 					<>
 						{Object.values(Locale).map((locale, i) => {
@@ -68,7 +68,7 @@ class LangSwitcher extends React.Component {
 						})}
 					</>
 				)}
-			</Context.Consumer>
+			</SiteContext.Consumer>
 		);
 	}
 }

@@ -1,6 +1,6 @@
 import { StaticQuery, graphql } from "gatsby";
 import { IGatsbyImageData } from "gatsby-plugin-image";
-import { Menu } from "../Menu";
+import { Menu } from "./Menu";
 import React from "react";
 import { SiteBranding } from "./SiteBranding";
 import styled from "styled-components";

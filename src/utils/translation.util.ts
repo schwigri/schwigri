@@ -3,7 +3,7 @@ import {
 	GermanTranslations,
 	JapaneseTranslations,
 	Translation,
-} from "../constants/translations.constants";
+} from "../constants/translation.constants";
 import { Locale } from "../constants/localization.constants";
 import { get } from "lodash";
 
