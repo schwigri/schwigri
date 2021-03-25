@@ -11,6 +11,7 @@ exports.createPages = async ({ actions, graphql }) => {
 		{
 			site {
 				siteMetadata {
+					siteUrl
 					title
 				}
 			}
@@ -76,6 +77,8 @@ exports.createPages = async ({ actions, graphql }) => {
 	const locales = ["en-us", "de-ch", "ja-jp"];
 	const allTags = {};
 
+	const site = result.data.site;
+
 	// Collect tags
 	result.data.posts.tags.forEach(({ fieldValue, nodes }) => {
 		allTags[fieldValue] = { lang: getLangCode(nodes[0].lang) };
@@ -108,6 +111,7 @@ exports.createPages = async ({ actions, graphql }) => {
 				date: firstPublicationDate,
 				id,
 				locale: lang,
+				site,
 				translations,
 				type: "post",
 				uid,
@@ -131,6 +135,7 @@ exports.createPages = async ({ actions, graphql }) => {
 				component: require.resolve("./src/templates/tag.tsx"),
 				context: {
 					locale: lang,
+					site,
 					tag,
 					type: "tag",
 					uid: slug,
@@ -155,6 +160,7 @@ exports.createPages = async ({ actions, graphql }) => {
 			component: require.resolve("./src/templates/works.tsx"),
 			context: {
 				locale,
+				site,
 				type: "works",
 			},
 			path,
@@ -173,6 +179,7 @@ exports.createPages = async ({ actions, graphql }) => {
 				allTags,
 				id,
 				locale: lang,
+				site,
 				type: "homepage",
 			},
 			path: permalink,
@@ -198,6 +205,7 @@ exports.createPages = async ({ actions, graphql }) => {
 				allTags,
 				id,
 				locale: lang,
+				site,
 				translations,
 				type: "page",
 				uid,
@@ -232,6 +240,7 @@ exports.createPages = async ({ actions, graphql }) => {
 				locale,
 				page: 0,
 				pages,
+				site,
 				skip: 0,
 				type: "blog",
 			},
@@ -249,6 +258,7 @@ exports.createPages = async ({ actions, graphql }) => {
 					locale,
 					page: i,
 					pages,
+					site,
 					skip: postsPerPage * i,
 					type: "blog",
 				},

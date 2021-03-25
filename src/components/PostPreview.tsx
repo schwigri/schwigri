@@ -76,7 +76,7 @@ class PostPreview extends React.Component<Props> {
 	render(): React.ReactNode {
 		const { className, post } = this.props;
 		const { data, tags } = post;
-		const { excerpt, featuredImage, title } = data || {};
+		const { featuredImage, title } = data || {};
 		const locale = getLocale(post.lang);
 		const slug = getSlug(
 			{
@@ -141,8 +141,6 @@ class PostPreview extends React.Component<Props> {
 									))}
 							</Tags>
 						)}
-
-						{excerpt && <p>{excerpt}</p>}
 
 						<p>
 							<Link

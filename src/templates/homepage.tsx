@@ -153,6 +153,8 @@ class HomepageTemplate extends React.Component<Props> {
 		const socialCardUrl = getSrc(socialCard) || "";
 		const socialCardJaUrl = getSrc(socialCardJa) || "";
 
+		console.log(this.props.data);
+
 		return (
 			<Context.Consumer>
 				{(context): React.ReactElement => (

@@ -99,6 +99,21 @@ const GlobalStyle = createGlobalStyle`
 		margin: 0 0 1em;
 	}
 
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	ol,
+	ul,
+	hr {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: ${({ theme }): string => theme.sizes.copy};
+	}
+
 	code {
 		font-size: 1em;
 	}
@@ -173,6 +188,12 @@ const GlobalStyle = createGlobalStyle`
 		@media (max-width: ${({ theme }): string => `${theme.breakpoints.lg - 1}px`}) {
 			display: none;
 		}
+	}
+
+	#disqus_thread {
+		margin: 4em auto;
+		max-width: ${({ theme }): string => theme.sizes.copy};
+		padding: 0 1em;
 	}
 `;
 

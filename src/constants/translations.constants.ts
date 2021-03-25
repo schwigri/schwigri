@@ -35,7 +35,11 @@ export enum Translation {
 	WorksSlug,
 }
 
-export const EnglishTranslations: { [key in Translation]: string } = {
+type Translations = {
+	[key in Translation]: string;
+};
+
+export const EnglishTranslations: Translations = {
 	[Translation.Blog]: "Blog",
 	[Translation.BlogDescription]:
 		"My latest blog posts on accessibility, internationalization, front-end development, UX design, and language learning.",
@@ -75,37 +79,80 @@ export const EnglishTranslations: { [key in Translation]: string } = {
 	[Translation.WorksSlug]: "works",
 };
 
-export const GermanTranslations: { [key: string]: string } = {
+export const GermanTranslations: Translations = {
 	[Translation.Blog]: "Blog",
+	[Translation.BlogDescription]:
+		"Meine neuesten Blog-Beiträge zu Barrierefreiheit, Internationalisierung, Front-End-Entwicklung, UX-Design, und Sprachenlernen.",
+	[Translation.ChangeLanguage]: "Sprache ändern",
+	[Translation.CloseMenu]: "Menü schliessen",
 	[Translation.ContinueReading]: "Weiterlesen",
 	[Translation.ContinueReadingTitle]: "«{title}» weiterlesen",
+	[Translation.Copyright]: "© 2021 Griffen Schwiesow",
+	[Translation.CurrentPageLabel]: "Seite {page}, aktuelle Seite",
+	[Translation.English]: "Englisch",
+	[Translation.EnglishOnly]: "Nur Englisch",
 	[Translation.German]: "Deutsch",
 	[Translation.HomeDescription]:
 		"Mit einem Abschluss in HCDE und Design- und Entwicklungshintergrund bin ich begeistert davon, schöne, nutzbare und zugängliche Erfahrungen zu erstellen.",
 	[Translation.HomeTitle]: "UX-Designer. Entwickler. Sprachbegeisterter.",
+	[Translation.Japanese]: "Japanisch",
 	[Translation.LatestPosts]: "Neueste Beiträge",
+	[Translation.LogoAlt]: "Blaues Unendlichkeitssymbollogo",
+	[Translation.MadeWithLovePeaceReact]: "Gemacht mit Liebe, Frieden und React",
+	[Translation.Next]: "Nächste",
+	[Translation.OpenMenu]: "Menü öffnen",
+	[Translation.PageLabel]: "Seite {page}",
+	[Translation.Previous]: "Vorheriger",
 	[Translation.Privacy]: "Datenschutzerklärung",
 	[Translation.PrivacySlug]: "datenschutzerklaerung",
+	[Translation.ProfilePhotoAlt]: "Ich geniesse die Kirschblüten",
+	[Translation.PublishedOn]: "Veröffentlicht: {date}",
 	[Translation.SeeMorePosts]: "Weitere Beiträge",
+	[Translation.SocialCardAlt]: "",
+	[Translation.TaggedSlug]: "tag",
+	[Translation.Tags]: "Tags",
+	[Translation.TitleTemplate]: "%s — Griffen Schwiesow",
+	[Translation.Untitled]: "Unbetitelt",
+	[Translation.UpdatedOn]: "Aktualisiert: {date}",
 	[Translation.Works]: "Portfolio",
 	[Translation.WorksSlug]: "portfolio",
 };
 
-export const JapaneseTranslations: { [key: string]: string } = {
+export const JapaneseTranslations: Translations = {
 	[Translation.Blog]: "ブログ",
+	[Translation.BlogDescription]:
+		"アクセシビリティ、国際化、フロントエンドエンジニアリング、UXデザイン、言語学習に関するブログ投稿です。",
+	[Translation.ChangeLanguage]: "言語を変える",
+	[Translation.CloseMenu]: "メニューを閉める",
 	[Translation.ContinueReading]: "続きを読む",
 	[Translation.ContinueReadingTitle]: "「{title}」の続きを読む",
+	[Translation.Copyright]: "令和二年 © グリフィン・シュヴィーゾー",
+	[Translation.CurrentPageLabel]: "{page}ページ、このページ",
+	[Translation.English]: "英語",
+	[Translation.EnglishOnly]: "英語だけ",
+	[Translation.German]: "ドイツ語",
 	[Translation.HomeDescription]:
 		"HCDEを専攻にしてデザイン・デベロップメントの経験を持つプロとして、美しくて使いやすくてアクセシビリティ的に良い経験を作成します。",
 	[Translation.HomeTitle]: "UX デザイナー・デベロッパー・語学マニア",
 	[Translation.Japanese]: "日本語",
 	[Translation.LatestPosts]: "最新の投稿",
+	[Translation.LogoAlt]: "青い無限のロゴ",
+	[Translation.MadeWithLovePeaceReact]: "愛を込めてプログラミングを",
 	[Translation.Next]: "次",
+	[Translation.OpenMenu]: "メニューを開く",
+	[Translation.PageLabel]: "{page}ページ",
 	[Translation.Previous]: "前",
 	[Translation.Privacy]: "プライバシー",
 	[Translation.PrivacySlug]: "privacy",
+	[Translation.ProfilePhotoAlt]: "花見を楽しめる私",
+	[Translation.PublishedOn]: "公開：{date}",
 	[Translation.SeeMorePosts]: "投稿の一覧へ",
+	[Translation.SocialCardAlt]: "",
+	[Translation.TaggedSlug]: "tag",
+	[Translation.Tags]: "タグ",
 	[Translation.TitleTemplate]: "%s ｜ グリフィン・シュヴィーゾー",
+	[Translation.Untitled]: "無題",
+	[Translation.UpdatedOn]: "更新",
 	[Translation.Works]: "実績",
 	[Translation.WorksSlug]: "jisseki",
 };

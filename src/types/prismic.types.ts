@@ -28,6 +28,11 @@ export interface PrismicContext {
 		description?: string;
 		title?: string;
 	};
+	site: {
+		siteMetadata: {
+			siteUrl: string;
+		};
+	};
 	tag?: string;
 	translations?: {
 		[key in LanguageCode]?: {

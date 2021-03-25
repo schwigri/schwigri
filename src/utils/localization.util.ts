@@ -13,21 +13,21 @@ import slugify from "slugify";
 type SlugContext =
 	| PrismicContext
 	| {
-	date?: string;
-	locale?: string;
-	seo?: {
-		title?: string;
-	};
-	tag?: string;
-	translations?: {
-		[key in LanguageCode]?: {
 			date?: string;
-			uid: string;
-		};
-	};
-	type: PageType;
-	uid?: string;
-};
+			locale?: string;
+			seo?: {
+				title?: string;
+			};
+			tag?: string;
+			translations?: {
+				[key in LanguageCode]?: {
+					date?: string;
+					uid: string;
+				};
+			};
+			type: PageType;
+			uid?: string;
+	  };
 
 export const getLanguageCode = (lang?: string): LanguageCode => {
 	const code = (lang || "").substr(0, 2);
@@ -79,14 +79,9 @@ export const getSlug = (context?: SlugContext, locale?: Locale): string => {
 
 		case PageType.Post:
 			if (context?.date && context?.uid) {
-				const uid =
-					locale === context.locale
-						? context.uid
-						: context.translations?.[lang]?.uid;
+				const uid = context.translations?.[lang]?.uid || context.uid;
 				const date = new Date(
-					locale === context.locale
-						? context.date
-						: context.translations?.[lang]?.date || ""
+					context.translations?.[lang]?.date || context.date || ""
 				);
 				const year = date.getFullYear();
 				const month = date.getMonth() + 1;

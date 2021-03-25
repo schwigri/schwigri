@@ -3,6 +3,7 @@ import { PrismicContext } from "../types/prismic.types";
 import React from "react";
 
 export interface ContextValue {
+	canonical?: string;
 	lang: LanguageCode;
 	locale: Locale;
 	pageContext?: PrismicContext;

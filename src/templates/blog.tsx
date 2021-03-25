@@ -27,8 +27,8 @@ const PostsGrid = styled("section")`
 	}
 `;
 
-const PageTitle = styled("h1")`
-	margin: 4em auto 2em;
+const Header = styled("div")`
+	margin: 4em 0;
 	text-align: center;
 `;
 
@@ -69,19 +69,21 @@ class BlogTemplate extends React.Component<Props> {
 							title={getTranslation(Translation.Blog, context.locale)}
 						/>
 
-						<PageTitle>
-							{getTranslation(Translation.Blog, context.locale)}
-							{page > 0 && (
-								<span>
-									{" "}
-									(
-									{getTranslation(Translation.PageLabel, context.locale, {
-										page: `${page + 1}`,
-									})}
-									)
-								</span>
-							)}
-						</PageTitle>
+						<Header>
+							<h1>
+								{getTranslation(Translation.Blog, context.locale)}
+								{page > 0 && (
+									<span>
+										{" "}
+										(
+										{getTranslation(Translation.PageLabel, context.locale, {
+											page: `${page + 1}`,
+										})}
+										)
+									</span>
+								)}
+							</h1>
+						</Header>
 
 						<PostsGrid>
 							{posts.map(({ node }) => (

@@ -32,7 +32,6 @@ const Tag = styled("li")`
 
 const Tags = styled("ul")`
 	list-style: none;
-	margin: 0;
 	padding: 0 1.6rem;
 
 	@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
@@ -44,13 +43,11 @@ const Meta = styled("div")`
 	color: ${({ theme }): string => theme.colors.subtitle};
 	font-size: 0.9em;
 	margin: 0 auto 1em;
-	max-width: ${({ theme }): string => theme.sizes.copy};
 	text-align: left;
 `;
 
 const Content = styled("div")`
 	margin: 4em auto;
-	max-width: ${({ theme }): string => theme.sizes.copy};
 `;
 
 const Subtitle = styled("div")`
@@ -100,12 +97,12 @@ class PostTemplate extends React.Component<Props> {
 							image={
 								socialCardUrl
 									? {
-										alt:
-											post.data?.socialCard?.thumbnails?.og?.alt ||
-											post.data?.socialCard?.alt ||
-											"",
-										url: socialCardUrl,
-									}
+											alt:
+												post.data?.socialCard?.thumbnails?.og?.alt ||
+												post.data?.socialCard?.alt ||
+												"",
+											url: socialCardUrl,
+									  }
 									: undefined
 							}
 							title={
@@ -148,7 +145,10 @@ class PostTemplate extends React.Component<Props> {
 
 								{hasTags && (
 									<Tags
-										aria-label={getTranslation(Translation.Tags, context.locale)}
+										aria-label={getTranslation(
+											Translation.Tags,
+											context.locale
+										)}
 										role={"list"}
 									>
 										{post.tags
