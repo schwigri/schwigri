@@ -67,7 +67,7 @@ export const getSlug = (context?: SlugContext, locale?: Locale): string => {
 
 	switch (context?.type) {
 		case PageType.Blog:
-			return `${prefix}blog`;
+			return `${prefix}${getTranslation(Translation.BlogSlug, locale)}`;
 
 		case PageType.Page:
 			if (context?.translations?.[lang]?.uid) {

@@ -1,6 +1,7 @@
 export enum Translation {
 	Blog,
 	BlogDescription,
+	BlogSlug,
 	ChangeLanguage,
 	CloseMenu,
 	ContinueReading,
@@ -43,6 +44,7 @@ export const EnglishTranslations: Translations = {
 	[Translation.Blog]: "Blog",
 	[Translation.BlogDescription]:
 		"My latest blog posts on accessibility, internationalization, front-end development, UX design, and language learning.",
+	[Translation.BlogSlug]: "blog",
 	[Translation.ChangeLanguage]: "Change language",
 	[Translation.CloseMenu]: "Close menu",
 	[Translation.ContinueReading]: "Continue reading",
@@ -83,6 +85,7 @@ export const GermanTranslations: Translations = {
 	[Translation.Blog]: "Blog",
 	[Translation.BlogDescription]:
 		"Meine neuesten Blog-Beiträge zu Barrierefreiheit, Internationalisierung, Front-End-Entwicklung, UX-Design, und Sprachenlernen.",
+	[Translation.BlogSlug]: "blog",
 	[Translation.ChangeLanguage]: "Sprache ändern",
 	[Translation.CloseMenu]: "Menü schliessen",
 	[Translation.ContinueReading]: "Weiterlesen",
@@ -122,6 +125,7 @@ export const JapaneseTranslations: Translations = {
 	[Translation.Blog]: "ブログ",
 	[Translation.BlogDescription]:
 		"アクセシビリティ、国際化、フロントエンドエンジニアリング、UXデザイン、言語学習に関するブログ投稿です。",
+	[Translation.BlogSlug]: "blog",
 	[Translation.ChangeLanguage]: "言語を変える",
 	[Translation.CloseMenu]: "メニューを閉める",
 	[Translation.ContinueReading]: "続きを読む",
