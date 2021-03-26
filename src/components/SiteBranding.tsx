@@ -66,15 +66,12 @@ class SiteBranding extends React.Component<Props> {
 						<Title
 							as={"homepage" === context.pageContext?.type ? "h1" : "span"}
 						>
-							{Locale.ja_JP === context.locale ? (
-								<>
-									グリフィン<span className={"upon-lg"}>・シュヴィーゾー</span>
-								</>
-							) : (
-								<>
-									Griffen<span className={"upon-sm"}> Schwiesow</span>
-								</>
-							)}
+							<span className={"until-lg"}>
+								{getTranslation(Translation.SiteTitleShort, context.locale)}
+							</span>
+							<span className={"upon-lg"}>
+								{getTranslation(Translation.SiteTitle, context.locale)}
+							</span>
 						</Title>
 					</Wrapper>
 				)}

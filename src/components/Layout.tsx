@@ -190,6 +190,12 @@ const GlobalStyle = createGlobalStyle`
 		}
 	}
 
+	.until-lg {
+		@media (min-width: ${({ theme }): string => `${theme.breakpoints.lg}px`}) {
+			display: none;
+		}
+	}
+
 	#disqus_thread {
 		margin: 4em auto;
 		max-width: ${({ theme }): string => theme.sizes.copy};
