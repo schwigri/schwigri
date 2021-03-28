@@ -31,7 +31,7 @@ const Wrapper = styled(GatsbyLink)`
 	${LinkStyles}
 `;
 
-interface Props extends GatsbyLinkProps<{}> {
+interface Props extends GatsbyLinkProps<unknown> {
 	menuOpen?: boolean;
 	toggleMenu?: () => void;
 }
@@ -42,6 +42,9 @@ class Link extends React.Component<Props> {
 			children,
 			menuOpen,
 			onClick,
+			// We want to remove the ref and use the rest of the props, otherwise
+			// it causes errors
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 			ref,
 			toggleMenu,
 			...rest

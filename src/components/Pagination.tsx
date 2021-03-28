@@ -1,6 +1,7 @@
-import { SiteContext, ContextValue } from "../context/site.context";
+import { ISiteContext } from "../types/site.types";
 import { Link } from "./Link";
 import React from "react";
+import { SiteContext } from "../context/site.context";
 import { Translation } from "../constants/translation.constants";
 import { getSlug } from "../utils/localization.util";
 import { getTranslation } from "../utils/translation.util";
@@ -25,9 +26,9 @@ class Pagination extends React.Component<Props> {
 		const { currentPage, numPages } = this.props;
 
 		const getLinks = ({
-			                  pageContext,
-			                  locale,
-		                  }: ContextValue): React.ReactNode => {
+			pageContext,
+			locale,
+		}: ISiteContext): React.ReactNode => {
 			const links = [];
 			for (let i = 0; i < numPages; i++) {
 				const prefix = getSlug(pageContext, locale);
@@ -50,7 +51,7 @@ class Pagination extends React.Component<Props> {
 			return links;
 		};
 
-		const getPreviousLink = ({ pageContext, locale }: ContextValue): string => {
+		const getPreviousLink = ({ pageContext, locale }: ISiteContext): string => {
 			const prefix = getSlug(pageContext, locale);
 			if (currentPage > 1) {
 				return `${prefix}/${currentPage - 1}`;
@@ -59,7 +60,7 @@ class Pagination extends React.Component<Props> {
 			return prefix;
 		};
 
-		const getNextLink = ({ pageContext, locale }: ContextValue): string => {
+		const getNextLink = ({ pageContext, locale }: ISiteContext): string => {
 			const prefix = getSlug(pageContext, locale);
 			return `${prefix}/${currentPage + 2}`;
 		};

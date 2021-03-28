@@ -54,7 +54,7 @@ const Wrapper = styled("article")`
 	background-color: ${({ theme }): string => theme.colors.background};
 	border-radius: 0.5em;
 	box-shadow: ${({ theme }): string =>
-	`0 0 1px ${theme.colors.separatorShadow}`};
+		`0 0 1px ${theme.colors.separatorShadow}`};
 	overflow: hidden;
 
 	h1 {

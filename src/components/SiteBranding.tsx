@@ -1,7 +1,6 @@
 import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
 import { SiteContext } from "../context/site.context";
 import { Link } from "./Link";
-import { Locale } from "../constants/localization.constants";
 import { PageType } from "../types/prismic.types";
 import React from "react";
 import { Translation } from "../constants/translation.constants";
