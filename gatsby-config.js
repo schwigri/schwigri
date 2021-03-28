@@ -42,18 +42,9 @@ module.exports = {
 		{
 			resolve: "gatsby-plugin-robots-txt",
 			options: {
-				env: {
-					development: {
-						host: null,
-						policy: [{ disallow: ["/"], userAgent: "*" }],
-						sitemap: null,
-					},
-					production: {
-						policy: [{ allow: "/", userAgent: "*" }],
-					},
-				},
-				host: "https://www.schwigri.com",
-				sitemap: "https://www.schwigri.com/sitemap.xml",
+				host: null,
+				policy: [{ disallow: ["/"], userAgent: "*" }],
+				sitemap: null,
 			},
 		},
 		{
