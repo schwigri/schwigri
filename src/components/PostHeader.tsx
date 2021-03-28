@@ -33,7 +33,12 @@ const Meta = styled("div")`
 	color: ${({ theme }): string => theme.colors.subtitle};
 	font-size: 0.9em;
 	margin: 0 auto 1em;
-	text-align: left;
+	text-align: center;
+
+	p,
+	ul {
+		margin: 0 auto 0.5em;
+	}
 `;
 
 const Subtitle = styled("div")`
@@ -42,17 +47,71 @@ const Subtitle = styled("div")`
 	font-size: 1.2em;
 `;
 
-const Header = styled("header")`
-	margin: 4em auto;
-	text-align: center;
+const TitleLink = styled(Link)`
+	border-bottom-width: 0;
+	color: inherit;
 `;
 
-const Wrapper = styled("div")``;
+const PreviewImage = styled(GatsbyImage)`
+	border-radius: 0.5em;
+	box-shadow: ${({ theme }): string =>
+		`0 0 1px ${theme.colors.separatorShadow}`};
+`;
+
+const ImageLink = styled(Link)`
+	border-bottom-width: 0;
+	display: flex;
+	justify-content: center;
+
+	&:focus,
+	&:hover {
+		background-color: transparent;
+	}
+`;
+
+const Header = styled("header")<PreviewProps>`
+	margin: ${({ $isPreview }): string => `${$isPreview ? "2em" : "4em"} auto`};
+	text-align: center;
+
+	h1 {
+		font-size: ${({ $isPreview }): string => ($isPreview ? "1.6em" : "3em")};
+	}
+`;
+
+const Wrapper = styled("div")<PreviewProps>`
+	&:not(:last-child) {
+		margin-bottom: ${({ $isPreview }): string => ($isPreview ? "4em" : "0")};
+		padding-bottom: ${({ $isPreview }): string => ($isPreview ? "4em" : "0")};
+		position: relative;
+
+		&::after {
+			background-color: ${({ theme }): string => theme.colors.separatorShadow};
+			bottom: 0;
+			content: "";
+			display: ${({ $isPreview }): string => ($isPreview ? "block" : "none")};
+			height: 1px;
+			left: 50%;
+			max-width: 560px;
+			opacity: 0.5;
+			position: absolute;
+			transform: translateX(-50%);
+			width: 80%;
+		}
+	}
+`;
+
+interface PreviewProps {
+	$isPreview: boolean;
+}
 
 interface Props {
 	featuredImage?: {
 		alt: string;
 		image?: IGatsbyImageData;
+	};
+	preview?: {
+		excerpt: string;
+		permalink: string;
 	};
 	publishedOn: Date;
 	subtitle?: PrismicText;
@@ -65,47 +124,51 @@ class PostHeader extends React.Component<Props> {
 	render(): React.ReactNode {
 		const {
 			featuredImage,
-			publishedOn,
+			preview,
+			// publishedOn,
 			subtitle,
 			tags,
 			title,
 			updatedOn,
 		} = this.props;
-		const sameDate =
-			publishedOn.getFullYear() === updatedOn.getFullYear() &&
-			publishedOn.getMonth() === updatedOn.getMonth() &&
-			publishedOn.getDate() === updatedOn.getDate();
+
+		// const sameDate =
+		// 	publishedOn.getFullYear() === updatedOn.getFullYear() &&
+		// 	publishedOn.getMonth() === updatedOn.getMonth() &&
+		// 	publishedOn.getDate() === updatedOn.getDate();
 
 		return (
 			<SiteContext.Consumer>
 				{context => (
-					<Wrapper>
-						{featuredImage?.image && (
-							<GatsbyImage
-								alt={featuredImage.alt}
-								image={featuredImage.image}
-							/>
-						)}
+					<Wrapper $isPreview={!!preview?.permalink}>
+						{featuredImage?.image &&
+							(preview?.permalink ? (
+								<ImageLink to={preview.permalink}>
+									<PreviewImage
+										alt={featuredImage.alt}
+										image={featuredImage.image}
+									/>
+								</ImageLink>
+							) : (
+								<GatsbyImage
+									alt={featuredImage.alt}
+									image={featuredImage.image}
+								/>
+							))}
 
-						<Header>
-							<RichText render={title.raw} />
+						<Header $isPreview={!!preview?.permalink}>
+							{preview?.permalink ? (
+								<TitleLink to={preview.permalink}>
+									<RichText render={title.raw} />
+								</TitleLink>
+							) : (
+								<RichText render={title.raw} />
+							)}
 
 							{subtitle && <Subtitle />}
 
 							<Meta>
-								<p>
-									{getTranslation(Translation.PublishedOn, context.locale, {
-										date: formatDate(publishedOn, context.locale),
-									})}
-									{!sameDate && (
-										<>
-											<br />
-											{getTranslation(Translation.UpdatedOn, context.locale, {
-												date: formatDate(updatedOn, context.locale),
-											})}
-										</>
-									)}
-								</p>
+								<p>{formatDate(updatedOn, context.locale)}</p>
 
 								{tags && tags.length > 0 && (
 									<Tags
@@ -133,6 +196,27 @@ class PostHeader extends React.Component<Props> {
 								)}
 							</Meta>
 						</Header>
+
+						{preview?.excerpt && <p>{preview.excerpt}</p>}
+
+						{preview?.permalink && (
+							<p>
+								<Link
+									aria-label={getTranslation(
+										Translation.ContinueReadingTitle,
+										context.locale,
+										{
+											title:
+												title.text ||
+												getTranslation(Translation.Untitled, context.locale),
+										}
+									)}
+									to={preview.permalink}
+								>
+									{getTranslation(Translation.ContinueReading, context.locale)}
+								</Link>
+							</p>
+						)}
 					</Wrapper>
 				)}
 			</SiteContext.Consumer>

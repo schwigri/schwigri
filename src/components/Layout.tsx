@@ -28,21 +28,16 @@ const MainWrapper = styled("main")`
 	p {
 		margin-left: auto;
 		margin-right: auto;
-		max-width: ${({ theme }): string => `${theme.sizes.copy}px`};
+		max-width: ${({ theme }): string => theme.sizes.copy};
 		padding-left: 1.6rem;
 		padding-right: 1.6rem;
-
-		@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
-			padding-left: 3.2rem;
-			padding-right: 3.2rem;
-		}
 	}
 
 	pre {
 		box-sizing: border-box;
 		margin-left: auto;
 		margin-right: auto;
-		max-width: ${({ theme }): string => `${theme.sizes.copy}px`};
+		max-width: ${({ theme }): string => theme.sizes.copy};
 		width: calc(100% - 3.2rem);
 	}
 `;
@@ -66,7 +61,6 @@ const TopBar = styled("aside")`
 		padding-right: max(2em, env(safe-area-inset-right));
 	}
 `;
-
 
 const GlobalStyle = createGlobalStyle`
 	html {

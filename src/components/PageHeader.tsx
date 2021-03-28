@@ -12,6 +12,10 @@ const Subtitle = styled("div")`
 const Wrapper = styled("div")`
 	margin: 4em auto;
 	text-align: center;
+
+	h1 {
+		font-size: 3em;
+	}
 `;
 
 interface Props {

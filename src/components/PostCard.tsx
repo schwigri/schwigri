@@ -72,7 +72,7 @@ interface Props {
 	post: PrismicPost;
 }
 
-class PostPreview extends React.Component<Props> {
+class PostCard extends React.Component<Props> {
 	render(): React.ReactNode {
 		const { className, post } = this.props;
 		const { data, tags } = post;
@@ -165,4 +165,4 @@ class PostPreview extends React.Component<Props> {
 	}
 }
 
-export { PostPreview };
+export { PostCard };
