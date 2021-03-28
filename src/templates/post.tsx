@@ -1,22 +1,22 @@
-import { SiteContext } from "../context/site.context";
 import { PostContent } from "../components/PostContent";
 import { PostHeader } from "../components/PostHeader";
 import { PrismicPost } from "../types/prismic.types";
 import React from "react";
 import { Seo } from "../components/Seo";
+import { SiteContext } from "../context/site.context";
 import { Translation } from "../constants/translation.constants";
 import { getImage } from "gatsby-plugin-image";
 import { getSrc } from "gatsby-plugin-image";
 import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
-import styled from "styled-components";
+// import styled from "styled-components";
 
-const Separator = styled("hr")`
-	border-bottom-color: ${({ theme }): string => theme.colors.separatorShadow};
-	border-top-width: 0;
-	margin: 4em auto;
-	width: 80%;
-`;
+// const Separator = styled("hr")`
+// 	border-bottom-color: ${({ theme }): string => theme.colors.separatorShadow};
+// 	border-top-width: 0;
+// 	margin: 4em auto;
+// 	width: 80%;
+// `;
 
 interface Props {
 	data: {
@@ -76,7 +76,7 @@ class PostTemplate extends React.Component<Props> {
 							/>
 						)}
 
-						<Separator />
+						{/*<Separator />*/}
 
 						<PostContent content={post.data?.body} />
 					</article>

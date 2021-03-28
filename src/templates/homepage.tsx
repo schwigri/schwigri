@@ -7,7 +7,7 @@ import {
 } from "gatsby-plugin-image";
 import { PrismicHomepage, PrismicPost } from "../types/prismic.types";
 import { SiteContext } from "../context/site.context";
-import { PostPreview } from "../components/PostPreview";
+import { PostCard } from "../components/PostCard";
 import React from "react";
 import { RichText } from "prismic-reactjs";
 import { Seo } from "../components/Seo";
@@ -35,7 +35,7 @@ const FeaturedContent = styled("div")`
 const FeaturedImage = styled(GatsbyImage)`
 	border-radius: 0.5em;
 	box-shadow: ${({ theme }): string =>
-	`0 0 1px ${theme.colors.separatorShadow}`};
+		`0 0 1px ${theme.colors.separatorShadow}`};
 	overflow: hidden;
 	width: 100%;
 	z-index: 0;
@@ -115,6 +115,14 @@ const LatestPosts = styled(Carousel)`
 const LatestPostsSection = styled("section")`
 	margin: 4em auto;
 	max-width: ${({ theme }): string => theme.sizes.content};
+
+	h2 {
+		max-width: 100%;
+
+		@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
+			padding: 0 3.2rem;
+		}
+	}
 
 	@media (min-width: ${({ theme }): string => `${theme.breakpoints.lg}px`}) {
 		padding: 0 2em;
@@ -206,7 +214,7 @@ class HomepageTemplate extends React.Component<Props> {
 									{posts.map(
 										({ node }): React.ReactElement => (
 											<LatestPost key={node.id}>
-												<PostPreview post={node} />
+												<PostCard post={node} />
 											</LatestPost>
 										)
 									)}

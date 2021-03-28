@@ -1,30 +1,19 @@
-import { SiteContext } from "../context/site.context";
+import { PageType, PrismicPost } from "../types/prismic.types";
+import { getLocale, getSlug } from "../utils/localization.util";
 import { Pagination } from "../components/Pagination";
-import { PostPreview } from "../components/PostPreview";
-import { PrismicPost } from "../types/prismic.types";
+import { PostHeader } from "../components/PostHeader";
 import React from "react";
 import { Seo } from "../components/Seo";
+import { SiteContext } from "../context/site.context";
 import { Translation } from "../constants/translation.constants";
+import { getImage } from "gatsby-plugin-image";
 import { getTranslation } from "../utils/translation.util";
 import { graphql } from "gatsby";
 import styled from "styled-components";
 
 const PostsGrid = styled("section")`
-	display: grid;
-	gap: 1em;
 	margin: 0 auto 4em;
 	max-width: ${({ theme }): string => theme.sizes.content};
-	padding: 0 1em;
-
-	@media (min-width: ${({ theme }): string => `${theme.breakpoints.sm}px`}) {
-		grid-template-columns: repeat(2, 1fr);
-	}
-
-	@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
-		gap: 2em;
-		grid-template-columns: repeat(3, 1fr);
-		padding: 0 2em;
-	}
 `;
 
 const Header = styled("div")`
@@ -86,9 +75,42 @@ class BlogTemplate extends React.Component<Props> {
 						</Header>
 
 						<PostsGrid>
-							{posts.map(({ node }) => (
-								<PostPreview key={node.id} post={node} />
-							))}
+							{posts.map(({ node }) => {
+								if (node.data?.title) {
+									return (
+										<PostHeader
+											featuredImage={{
+												alt: node.data.featuredImage?.alt || "",
+												image: node.data.featuredImage?.thumbnails
+													?.desktopHeader?.localFile
+													? getImage(
+															node.data.featuredImage.thumbnails.desktopHeader
+																.localFile
+													  )
+													: undefined,
+											}}
+											key={node.id}
+											preview={{
+												excerpt: node.data?.excerpt || "",
+												permalink: getSlug(
+													{
+														date: node.firstPublicationDate,
+														id: node.id || "",
+														locale: getLocale(node.lang),
+														type: PageType.Post,
+														uid: node.uid || "",
+													},
+													getLocale(node.lang)
+												),
+											}}
+											publishedOn={new Date(node.firstPublicationDate || "")}
+											tags={node.tags}
+											title={node.data.title}
+											updatedOn={new Date(node.lastPublicationDate || "")}
+										/>
+									);
+								}
+							})}
 						</PostsGrid>
 
 						{pages > 1 && <Pagination currentPage={page} numPages={pages} />}
@@ -114,10 +136,14 @@ export const query = graphql`
 						featuredImage: featured_image {
 							alt
 							thumbnails {
-								mobileCard: mobile_card {
+								desktopHeader: desktop_header {
 									localFile {
 										childImageSharp {
-											gatsbyImageData(placeholder: BLURRED, width: 720)
+											gatsbyImageData(
+												layout: CONSTRAINED
+												placeholder: BLURRED
+												width: 700
+											)
 										}
 									}
 								}
