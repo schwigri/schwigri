@@ -136,7 +136,7 @@ const LatestPostsSection = styled("section")`
 interface Props {
 	data: {
 		homepage: PrismicHomepage;
-		posts: {
+		posts?: {
 			edges: {
 				node: PrismicPost;
 			}[];
@@ -149,7 +149,7 @@ interface Props {
 
 class HomepageTemplate extends React.Component<Props> {
 	render(): React.ReactNode {
-		const posts = this.props.data.posts.edges;
+		const posts = this.props.data.posts?.edges;
 		const {
 			homepage,
 			profilePhoto,
@@ -160,8 +160,6 @@ class HomepageTemplate extends React.Component<Props> {
 		const featuredImage = getImage(profilePhoto);
 		const socialCardUrl = getSrc(socialCard) || "";
 		const socialCardJaUrl = getSrc(socialCardJa) || "";
-
-		console.log(this.props.data);
 
 		return (
 			<SiteContext.Consumer>
@@ -205,7 +203,7 @@ class HomepageTemplate extends React.Component<Props> {
 							</FeaturedContent>
 						</FeaturedWrapper>
 
-						{posts.length && (
+						{posts?.length && (
 							<LatestPostsSection>
 								<h2>
 									{getTranslation(Translation.LatestPosts, context.locale)}
@@ -239,41 +237,6 @@ export const query = graphql`
 				}
 				title {
 					raw
-				}
-			}
-		}
-		posts: allPrismicPost(
-			limit: 3
-			filter: { lang: { eq: $locale } }
-			sort: { order: DESC, fields: last_publication_date }
-		) {
-			edges {
-				node {
-					data {
-						excerpt
-						featuredImage: featured_image {
-							alt
-							thumbnails {
-								mobileCard: mobile_card {
-									localFile {
-										childImageSharp {
-											gatsbyImageData(placeholder: BLURRED, width: 720)
-										}
-									}
-								}
-							}
-						}
-						title {
-							raw
-							text
-						}
-					}
-					firstPublicationDate: first_publication_date
-					id
-					lang
-					lastPublicationDate: last_publication_date
-					tags
-					uid
 				}
 			}
 		}

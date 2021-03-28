@@ -1,6 +1,5 @@
 import { StaticQuery, graphql } from "gatsby";
 import { IGatsbyImageData } from "gatsby-plugin-image";
-import { Menu } from "./Menu";
 import React from "react";
 import { SiteBranding } from "./SiteBranding";
 import styled from "styled-components";
@@ -8,7 +7,7 @@ import styled from "styled-components";
 const Content = styled("div")`
 	align-items: center;
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	margin: 0 auto;
 	max-width: ${({ theme }): string => theme.sizes.content};
 `;
@@ -41,8 +40,6 @@ class Header extends React.Component<Props> {
 			<Wrapper>
 				<Content>
 					<SiteBranding logo={logo} />
-
-					<Menu />
 				</Content>
 			</Wrapper>
 		);

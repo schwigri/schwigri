@@ -1,18 +1,14 @@
-import { ExternalLink, Link } from "./Link";
-import { SiteContext } from "../context/site.context";
-import { PageType } from "../types/prismic.types";
+import { ExternalLink } from "./Link";
 import React from "react";
+import { SiteContext } from "../context/site.context";
 import { Translation } from "../constants/translation.constants";
-import { getSlug } from "../utils/localization.util";
 import { getTranslation } from "../utils/translation.util";
 import styled from "styled-components";
 
 const RepoText = styled("abbr")`
-	&::after {
-		@media (min-width: ${({ theme }): string => `${theme.breakpoints.md}px`}) {
-			content: "\\A("attr(title) ")" !important;
-			white-space: pre;
-		}
+	&[title]&::after {
+		content: "\\A(" attr(title) ")" !important;
+		white-space: pre;
 	}
 `;
 
@@ -76,14 +72,6 @@ class Footer extends React.Component {
 							<Side>
 								<Item>
 									{getTranslation(Translation.Copyright, context.locale)}
-								</Item>
-
-								<Item>
-									<Link
-										to={getSlug({ type: PageType.Privacy }, context.locale)}
-									>
-										{getTranslation(Translation.Privacy, context.locale)}
-									</Link>
 								</Item>
 
 								<Item>

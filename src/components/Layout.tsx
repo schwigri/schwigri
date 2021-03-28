@@ -46,7 +46,7 @@ const TopBarContent = styled("div")`
 	font-size: 0.9em;
 	margin: 0 auto;
 	max-width: ${({ theme }): string => theme.sizes.content};
-	text-align: right;
+	text-align: center;
 `;
 
 const TopBar = styled("aside")`
@@ -233,7 +233,7 @@ class Layout extends React.Component<Props, State> {
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
 
-				<TopBar className={"upon-md"}>
+				<TopBar>
 					<TopBarContent>
 						<LangSwitcher />
 					</TopBarContent>
