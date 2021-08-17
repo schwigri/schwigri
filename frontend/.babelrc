@@ -1,0 +1,28 @@
+{
+	"plugins": [
+		"@babel/plugin-proposal-class-properties",
+		"@babel/plugin-proposal-object-rest-spread",
+		"@babel/plugin-proposal-optional-chaining",
+		[
+			"@babel/plugin-proposal-private-methods",
+			{ "loose": false }
+		],
+		[
+			"@babel/plugin-proposal-private-property-in-object",
+			{ "loose": false }
+		],
+		"babel-plugin-styled-components"
+	],
+	"presets": [
+		"@babel/preset-env",
+		"@babel/preset-typescript",
+		[
+			"babel-preset-gatsby",
+			{
+				"targets": {
+					"browsers": [">0.25%", "not dead"]
+				}
+			}
+		]
+	]
+}

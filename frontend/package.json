@@ -1,0 +1,58 @@
+{
+	"author": {
+		"email": "gs@griffen.dev",
+		"name": "Griffen Schwiesow",
+		"url": "https://www.griffen.dev"
+	},
+	"description": "A frontend for a backend",
+	"license": "MIT",
+	"name": "@schwigri/frontend",
+	"private": true,
+	"version": "0.1.0",
+	"scripts": {
+		"build": "gatsby build",
+		"clean": "gatsby clean",
+		"develop": "gatsby develop",
+		"serve": "gatsby serve",
+		"test": "jest"
+	},
+	"dependencies": {
+		"@fontsource/m-plus-1p": "^4.5.0",
+		"@fontsource/work-sans": "^4.5.0",
+		"@types/react-helmet": "^6.1.2",
+		"@types/styled-components": "^5.1.12",
+		"debug": "^3.2.7",
+		"dotenv": "^8.6.0",
+		"framer-motion": "^4.1.17",
+		"gatsby": "^3.11.1",
+		"gatsby-plugin-image": "^1.11.0",
+		"gatsby-plugin-manifest": "^3.11.0",
+		"gatsby-plugin-robots-txt": "^1.6.9",
+		"gatsby-plugin-sharp": "^3.11.0",
+		"gatsby-plugin-sitemap": "^4.7.0",
+		"gatsby-plugin-styled-components": "^4.11.0",
+		"gatsby-source-strapi": "^1.0.2",
+		"gatsby-transformer-sharp": "^3.11.0",
+		"lodash": "^4.17.21",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-helmet": "^6.1.0",
+		"react-intersection-observer": "^8.32.0",
+		"react-redux": "^7.2.4",
+		"redux": "^4.1.1",
+		"styled-components": "^5.3.0",
+		"typescript": "^4.3.5"
+	},
+	"devDependencies": {
+		"@testing-library/cypress": "^8.0.0",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^12.0.0",
+		"@testing-library/user-event": "^13.2.1",
+		"@types/jest": "^26.0.24",
+		"babel-plugin-styled-components": "^1.13.2",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^3.4.0",
+		"jest": "^27.0.6",
+		"jest-styled-components": "^7.0.5"
+	}
+}

@@ -1,0 +1,49 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true,
+		"jest": true,
+		"node": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:jsx-a11y/recommended",
+		"plugin:prettier/recommended",
+		"plugin:react/recommended"
+	],
+	"overrides": [
+		{
+			"extends": ["plugin:@typescript-eslint/recommended"],
+			"files": ["**/*.ts", "**/*.tsx"],
+			"parser": "@typescript-eslint/parser",
+			"parserOptions": {
+				"ecmaFeatures": {
+					"jsx": true
+				},
+				"ecmaVersion": 2018,
+				"sourceType": "module"
+			},
+			"plugins": ["@typescript-eslint"]
+		}
+	],
+	"parser": "@babel/eslint-parser",
+	"plugins": [
+		"prettier",
+		"react"
+	],
+	"rules": {
+		// The Accessible Emoji rule has been deprecated
+		"jsx-a11y/accessible-emoji": "off",
+		"no-console": "warn",
+		"no-unused-vars": "error",
+		"prettier/prettier": "error",
+		"quotes": ["warn", "double", { "avoidEscape": true }],
+		"react/prop-types": "warn",
+		"sort-imports": "warn"
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
+}
