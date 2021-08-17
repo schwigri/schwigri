@@ -33,6 +33,14 @@
         }
       },
       "type": "string"
+    },
+    "seoTitle": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
     }
   }
 }
